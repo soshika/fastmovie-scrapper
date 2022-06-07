@@ -6,23 +6,26 @@ if __name__ == "__main__":
     
     url = 'https://siasky.net/EABTfUXaKxBIokvJqTxnIWLau-phIsbmLSuQdZyHOdsBMQ'
 
-    r = requests.get(url)
+    r = requests.get(url, allow_redirects=True)
+    open('test.mp4', 'wb').write(r.content)
 
-    movie_name = 'test.mp4'
+    # r = requests.get(url)
 
-    with open(movie_name, 'wb') as f:
-        f.write(r.content)
+    # movie_name = 'test.mp4'
 
-    print('File {0} Downloaded Successfully'.format(movie_name))
+    # with open(movie_name, 'wb') as f:
+    #     f.write(r.content)
 
-    directory = directory = os.getcwd()
-    file_path = directory + '/' + movie_name
+    # print('File {0} Downloaded Successfully'.format(movie_name))
+
+    # directory = directory = os.getcwd()
+    # file_path = directory + '/' + movie_name
     
-    client = skynet.SkynetClient() # link to skynet
-    skylink = client.upload_file(file_path)
-    print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
+    # client = skynet.SkynetClient() # link to skynet
+    # skylink = client.upload_file(file_path)
+    # print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
 
-    os.remove(file_path)
-    print("File {0} deleted from server successfully".format(movie_name))
+    # os.remove(file_path)
+    # print("File {0} deleted from server successfully".format(movie_name))
 
     #update db
