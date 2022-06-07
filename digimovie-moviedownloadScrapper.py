@@ -48,6 +48,9 @@ if __name__ == "__main__":
                     client = skynet.SkynetClient() # link to skynet
                     skylink = client.upload_file(file_path)
                     print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
+
+                    os.remove(file_path)
+                    print("File {0} deleted from server successfully".format(movie_name))
                     #https://siasky.net/EAAATkfooqnDL-xjmleOf-gwXXLXIsFCWz74hJtxKk-i0Q
                 ind +=1
 
