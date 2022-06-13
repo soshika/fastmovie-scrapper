@@ -33,36 +33,35 @@
 
 
 
-# from telethon import TelegramClient, sync
-# #import logging
+from telethon import TelegramClient, sync
+#import logging
 
-# api_id=1587025
-# api_hash='3ad4a744593f7759ca277eb9041643f5'
+api_id=1587025
+api_hash='3ad4a744593f7759ca277eb9041643f5'
 
-# #logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
-# client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
-#     # You may want to use proxy to connect to Telegram
-#     #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
-# )
+client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
+    # You may want to use proxy to connect to Telegram
+    #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
+)
 
-# async def main():
-#     async for message in client.iter_messages('@sd_tu'):
-#         print(message.id, message.text)
+async def main():
+    async for message in client.iter_messages('@Filimo_Pagee'):
+        print(message.id, message.text)
 
-#         cnt = 0
+        cnt = 0
 
-#         # You can download media from messages, too!
-#         # The method will return the path where the file was saved.
-#         if message.media:
-#             if cnt == 1:
-#                 break
-#             cnt += 1
-#             path = await message.download_media()
-#             print('File saved to', path)  # printed after download is done
+        # You can download media from messages, too!
+        # The method will return the path where the file was saved.
+        if message.media:
+            if '480' or '720' or '1080' in message.text:
+                cnt += 1
+                path = await message.download_media()
+                print('File saved to', path)  # printed after download is done
 
-# with client:
-#     client.loop.run_until_complete(main())
+with client:
+    client.loop.run_until_complete(main())
 
 
 # import os
@@ -78,17 +77,17 @@
 
 # result.write_videofile("movie1.mp4", fps=video.fps, temp_audiofile="temp-audio.m4a", remove_temp=True, codec="libx264", audio_codec="aac")
 
-import os
-import siaskynet as skynet
+# import os
+# import siaskynet as skynet
 
-if __name__ == "__main__":
-    movie_name = 'lukas.png'
-    directory = directory = os.getcwd()
-    file_path = directory + '/' + movie_name
+# if __name__ == "__main__":
+#     movie_name = 'lukas.png'
+#     directory = directory = os.getcwd()
+#     file_path = directory + '/' + movie_name
 
-    client = skynet.SkynetClient()
-    skylink = client.upload_file(file_path)
-    print("Upload successful, skylink: " + skylink)
+#     client = skynet.SkynetClient()
+#     skylink = client.upload_file(file_path)
+#     print("Upload successful, skylink: " + skylink)
 
 
    
