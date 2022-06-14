@@ -1,19 +1,22 @@
+# -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 import os
+import sys
+import importlib
 import siaskynet as skynet
 
 if __name__ == "__main__":
 
     proxy = {
-        "http": 'http://46.209.56.112:8080',
-        'http': 'http://31.25.95.51:9812',
+        # "http": 'http://5.161.100.145:1080',
+        'http': 'http://81.16.122.116:5678',
     }
 
     for page in range(1, 293):
         print("Page {0}".format(page) + ('-'*60))
         
-        url = 'https://digimovie.li/genre/درام/'.encode('utf-8').strip()
+        url = 'https://digimovie.li/genre/درام/'
 
         if page > 1 : 
             url += 'page/{0}/'.format(page)
