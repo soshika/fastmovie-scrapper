@@ -46,6 +46,17 @@ def InsertTable(title, duration, quality, imdb_rate, thumbnail, description, dat
     con.commit()
     con.close()
 
+def InserTableFilimo(link, details):
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+    data = [link, details]
+    cur.execute('''INSERT INTO filimo_movies
+                    (link, details)
+                    VALUES(?, ?);''', data)
+
+    con.commit()
+    con.close()
+
 def DropTable():
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()

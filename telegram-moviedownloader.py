@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
+import siaskynet as skynet
 from telethon import TelegramClient, sync
+import movieDB
 #import logging
 
 api_id=1587025
@@ -21,10 +24,23 @@ async def main():
             if '480' or '720' or '1080' in message.text:
                 cnt += 1
                 path = await message.download_media()
-                print(path)
-                print('File saved to', path)  # printed after download is done
-        
-        print(cnt)
+                directory = directory = os.getcwd()
+                file_path = directory + '/' + path
+
+                print('File saved to', file_path)
+
+                # link to skynet
+                client = skynet.SkynetClient() 
+                skylink = client.upload_file(file_path)
+                print("File {0} Uploaded successfully: link is {1} ".format(path, skylink))
+
+                # remove from server
+                os.remove(file_path)
+                print("File {0} deleted from server successfully".format(file_path))
+
+                movieDB.InserTableFilimo(skylink, message.text)
+
+        print('-'*50)
 
 with client:
     client.loop.run_until_complete(main())
