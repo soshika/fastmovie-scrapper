@@ -5,6 +5,11 @@ import siaskynet as skynet
 
 if __name__ == "__main__":
 
+    proxy = {
+        "http": 'http://46.209.56.112:8080',
+        'http': 'http://31.25.95.51:9812',
+    }
+
     for page in range(1, 293):
         print("Page {0}".format(page) + ('-'*60))
         
@@ -14,7 +19,7 @@ if __name__ == "__main__":
             url += 'page/{0}/'.format(page)
 
         print(url)
-        response = requests.get(url)
+        response = requests.get(url, proxies=proxy)
 
         soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -23,7 +28,7 @@ if __name__ == "__main__":
         for movie in movies:
             link = movie.find('a')['href']
             print(link)
-            response_link = requests.get(link)
+            response_link = requests.get(link, proxies=proxy)
             soup_link = BeautifulSoup(response_link.content, 'html.parser')
             download_data = soup_link.find_all('div', class_='btn_row_dl')
 
