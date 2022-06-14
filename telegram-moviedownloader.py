@@ -17,7 +17,10 @@ client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
 
 async def main():
     async for message in client.iter_messages('@Filimo_Pagee'):
+        print(message.id, message.text)
+
         cnt = 0
+
         # You can download media from messages, too!
         # The method will return the path where the file was saved.
         if message.media:
@@ -30,8 +33,8 @@ async def main():
                 print('File saved to', file_path)
 
                 # link to skynet
-                client = skynet.SkynetClient() 
-                skylink = client.upload_file(file_path)
+                skylink_client = skynet.SkynetClient() 
+                skylink = skylink_client.upload_file(file_path)
                 print("File {0} Uploaded successfully: link is {1} ".format(path, skylink))
 
                 # remove from server
@@ -41,6 +44,10 @@ async def main():
                 movieDB.InserTableFilimo(skylink, message.text)
 
         print('-'*50)
+    
+
+    # async for message in client.iter_messages('@Filimo_Pagee'):
+   
 
 with client:
     client.loop.run_until_complete(main())
