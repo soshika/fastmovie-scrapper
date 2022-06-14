@@ -40,7 +40,7 @@ if __name__ == "__main__":
                     print('link no {0}: {1} '.format(ind, a))
                     download_url = str(a)
                     print('download is about to start : {0}'.format(download_url))
-                    r = requests.get(download_url)
+                    r = requests.get(download_url, proxies=proxy)
                     movie_name = download_url.split('/')[-1].replace('DigiMoviez', 'fastMovie')
                     with open(movie_name, 'wb') as f:
                         f.write(r.content)
