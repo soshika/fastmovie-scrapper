@@ -16,7 +16,7 @@ if __name__ == "__main__":
     for page in range(1, 293):
         print("Page {0}".format(page) + ('-'*60))
         
-        url = 'https://digimovie.li/genre/درام/'
+        url = 'https://digimovie.li/'
 
         if page > 1 : 
             url += 'page/{0}/'.format(page)
