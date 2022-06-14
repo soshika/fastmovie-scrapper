@@ -17,14 +17,14 @@ client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
 
 async def main():
     async for message in client.iter_messages('@Filimo_Pagee'):
-        print(message.id, message.text)
 
         cnt = 0
 
         # You can download media from messages, too!
         # The method will return the path where the file was saved.
         if message.media:
-            if '480' or '720' or '1080' in message.text:
+            if ('360' in str(message.text)) or ('720' in str(message.text)) or ('1080' in str(message.text)) :
+                print(message.text)
                 cnt += 1
                 path = await message.download_media()
                 directory = directory = os.getcwd()
@@ -41,7 +41,8 @@ async def main():
                 os.remove(file_path)
                 print("File {0} deleted from server successfully".format(file_path))
 
-                movieDB.InserTableFilimo(skylink, message.text)
+                print(str(message.text))
+                movieDB.InserTableFilimo(skylink, str(message.text))
 
         print('-'*50)
     
