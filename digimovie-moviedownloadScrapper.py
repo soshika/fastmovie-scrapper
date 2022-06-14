@@ -8,7 +8,7 @@ if __name__ == "__main__":
     for page in range(1, 293):
         print("Page {0}".format(page) + ('-'*60))
         
-        url = 'https://digimovie.li/genre/درام/'
+        url = 'https://digimovie.li/genre/درام/'.encode('utf-8').strip()
 
         if page > 1 : 
             url += 'page/{0}/'.format(page)
@@ -53,6 +53,4 @@ if __name__ == "__main__":
                     print("File {0} deleted from server successfully".format(movie_name))
                     #https://siasky.net/EAAATkfooqnDL-xjmleOf-gwXXLXIsFCWz74hJtxKk-i0Q
                 ind +=1
-                print('*'*50)
-
-            
+                print('*'*50)            
