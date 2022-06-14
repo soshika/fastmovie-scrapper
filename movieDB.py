@@ -30,12 +30,8 @@ def CreateTableFilimo():
     cur.execute('''CREATE TABLE IF NOT EXISTS filimo_movies
                 (
                     id INTEGER PRIMARY KEY,
-                    title VARCHAR(255),
-                    is_movie BOOL,
-                    quality varchar(32),
-                    season integer,
-                    episode integer,
-                    generes VARCHAR(64))''')
+                    link VARCHAR(255),
+                    details TEXT)''')
     con.commit()
     con.close()
 
@@ -54,7 +50,7 @@ def DropTable():
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
 
-    cur.execute('DROP TABLE movies')
+    cur.execute('DROP TABLE filimo_movies')
     con.commit()
     con.close()
 
