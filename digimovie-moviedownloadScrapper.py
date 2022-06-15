@@ -17,6 +17,7 @@ def create_driver(can_download=False):
     PROXY = '188.93.64.242:4153'
     options = Options()
     options.add_argument('--proxy-server=%s' % PROXY)
+    options.headless = True
     if can_download:
         profile = webdriver.FirefoxProfile()
         profile.set_preference("browser.download.folderList",2)
