@@ -16,10 +16,9 @@ client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
 )
 
 async def main():
+    can_download = False
     async for message in client.iter_messages('@Filimo_Pagee'):
         cnt = 0
-        can_download = False
-
         # You can download media from messages, too!
         # The method will return the path where the file was saved.
         if message.media:
