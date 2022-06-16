@@ -22,13 +22,14 @@ async def main():
         # You can download media from messages, too!
         # The method will return the path where the file was saved.
         if message.media:
-            if str(message.text) == '''🎥 سریال  «**جیران**»
-🎬 قسمت هجدهم
+            if str(message.text) == '''🎥 مسابقه شب های مافیا ۴
+🎞 قسمت دوم
+📼 فصل چهارم
 💠 نسخه اورجینال
-🔰 ژانر:  عاشقانه | خانوادگی
-🎞 کیفیت 360p
+🔰 ژانر: خانوادگی| اجتماعی  
+🎞 کیفیت 720p
 📎لینک دانلود [نیم‌بها] :
-https://2ad.ir/QMZe4jpR
+https://2ad.ir/WVCwNaU
 
 🎥 | @Filimo_Page 🎭''':
                 can_download = True
