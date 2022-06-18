@@ -1,3 +1,10 @@
 fastmovie-scrapper:
     build: .
     privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
+        labels: "production_status"
+        env: "os"

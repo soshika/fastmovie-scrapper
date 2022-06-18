@@ -1,2 +1,1 @@
-docker build .
-docker run -d --restart always fastmovie
+docker-compose up
