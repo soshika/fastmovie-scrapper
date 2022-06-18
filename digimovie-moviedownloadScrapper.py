@@ -29,21 +29,17 @@ def get_proxy():
     return data
 
 
-def create_driver(can_download=False):
-    PROXY = '188.93.64.242:4153'
-    options = Options()
-    options.add_argument('--proxy-server=%s' % PROXY)
-    options.headless = True
-    if can_download:
-        profile = webdriver.FirefoxProfile()
-        profile.set_preference("browser.download.folderList",2)
-        profile.set_preference("browser.download.manager.showWhenStarting", False)
-        profile.set_preference("browser.download.dir","/root/fastmovie/downloads/")
-        #Example:profile.set_preference("browser.download.dir", "C:\Tutorial\down")
-        profile.set_preference("browser.helperApps.neverAsk.saveToDisk","application/octet-stream")
-        driver = webdriver.Firefox(firefox_profile=profile, options=options)
-        return driver
+def create_driver():
+    proxies_dic = get_proxy()
+    proxies = proxies_dic['Proxies']
 
+    proxy = proxies[random.randint(0, len(proxies))]
+    print("proxy is : ", proxy)
+
+    # PROXY = '188.93.64.242:4153'
+    options = Options()
+    options.add_argument('--proxy-server={0}:{1}'.format(proxy['ip'], proxy['port']) )
+    options.headless = True
     driver = webdriver.Firefox(options=options)
 
     return driver
@@ -69,7 +65,7 @@ if __name__ == "__main__":
             link = movie.find_element_by_tag_name('a').get_attribute('href')
             print(link)
 
-            page_driver = create_driver(True)
+            page_driver = create_driver()
             page_driver.get(link)
             download_data = page_driver.find_elements_by_xpath("//a[@class='btn_row btn_dl']")
             
@@ -83,14 +79,11 @@ if __name__ == "__main__":
 
                 proxy = proxies[random.randint(0, len(proxies))]
                 print("proxy is : ", proxy)
-                test_proxies = {
-                    'https': 'https://{0}:{1}'.format(proxy['ip'], proxy['port'])
-                }
-                response_test = requests.get('https://google.com', proxies=test_proxies)
-                if response.status_code == 200 :
-                    cmd = 'curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port'])
-                    print('cmd is : ', cmd)
-                    os.system(cmd)
+
+                cmd = 'curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port'])
+                print('cmd is : ', cmd)
+
+                os.system(cmd)
 
 
             page_driver.quit()
