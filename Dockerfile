@@ -12,9 +12,9 @@ COPY . $APP_HOME/
 RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
     echo "http://dl-4.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
 RUN apk update
-RUN apk add make automake gcc g++ subversion python3-dev
+RUN apk add make automake gcc g++ subversion python3-dev libxml2
 RUN apk add chromium chromium-chromedriver
-# RUN pip3 install --upgrade pip3
+RUN pip3 install --upgrade pip
 # RUN pip3 install BeautifulSoup4
 # RUN pip3 install wheel
 # RUN pip3 install selenium
