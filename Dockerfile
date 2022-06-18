@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM cenots
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -9,21 +9,22 @@ WORKDIR /$APP_HOME
 
 COPY . $APP_HOME/
 
-RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
-    echo "http://dl-4.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
-RUN apk update
-RUN apk add make automake gcc g++ subversion python3-dev
-RUN apk add --update --no-cache g++ gcc libxslt-dev
-RUN apk add chromium chromium-chromedriver
-RUN apk add --no-cache --virtual .build-deps gcc libc-dev libxslt-dev && \
-    apk add --no-cache libxslt && \
-    pip install --no-cache-dir lxml>=3.5.0 && \
-    apk del .build-deps
-RUN pip install --upgrade pip
+# RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
+#     echo "http://dl-4.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
+# RUN apk update
+# RUN apk add make automake gcc g++ subversion python3-dev
+# RUN apk add --update --no-cache g++ gcc libxslt-dev
+# RUN apk add chromium chromium-chromedriver
+# RUN apk add --no-cache --virtual .build-deps gcc libc-dev libxslt-dev && \
+#     apk add --no-cache libxslt && \
+#     pip install --no-cache-dir lxml>=3.5.0 && \
+#     apk del .build-deps
+RUN yum install -y python3
+RUN pip3 install --upgrade pip
 # RUN pip3 install BeautifulSoup4
 # RUN pip3 install wheel
 # RUN pip3 install selenium
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 # RUN pip3 install --ignore-installed beautifulsoup4
 # CMD tail -f /dev/null
-CMD python digimovie-moviedownloadScrapper.py
+CMD python3 digimovie-moviedownloadScrapper.py
