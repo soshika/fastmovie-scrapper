@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-import wget
 import os
+import requests
+import random
 import siaskynet as skynet
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -12,6 +13,20 @@ from datetime import datetime
 proxies = {
    'http': 'http://188.93.64.242:4153',
 }
+
+def get_proxy():
+    url = "https://www.proxydocker.com/en/proxylist/api?email=zsaman37@yahoo.com&country=IRAN&city=all&port=all&type=https&anonymity=ELITE&state=all&need=all&format=json"
+
+    payload={}
+    headers = {
+    'Cookie': 'AWSALB=Q0zb2wUVwOX3+lr0bMgppViA5Y0ivJXlfgyXz8iNmft5CtboAA62r21yDUnYspfhpIFWQTeJgHOIvuJyK33/Jv6EEQomF+kYkC5Ojz0tClpYFjgYYQMyiXdtt3Fv; AWSALBCORS=Q0zb2wUVwOX3+lr0bMgppViA5Y0ivJXlfgyXz8iNmft5CtboAA62r21yDUnYspfhpIFWQTeJgHOIvuJyK33/Jv6EEQomF+kYkC5Ojz0tClpYFjgYYQMyiXdtt3Fv'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+
+    data = response.json()
+    return data
+
 
 def create_driver(can_download=False):
     PROXY = '188.93.64.242:4153'
@@ -61,7 +76,13 @@ if __name__ == "__main__":
                 download_file = download.get_attribute('href')
                 print('download is about to start at {0} : {1}'.format(datetime.now(), download_file))
                 # wget.download(download_file, 'movie.mp4')
-                os.system('curl -x \'http://79.127.56.147:8080\' -O {0}'.format(download_file))
+                
+                proxies_dic = get_proxy()
+                proxies = proxies_dic['Proxies']
+
+                proxy = proxies[random.randint(0, len(proxies))]
+                print("proxy is : ", proxy)
+                os.system('curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port']))
 
 
             page_driver.quit()
