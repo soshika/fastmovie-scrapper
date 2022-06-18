@@ -19,8 +19,8 @@ COPY . $APP_HOME/
 #     apk add --no-cache libxslt && \
 #     pip install --no-cache-dir lxml>=3.5.0 && \
 #     apk del .build-deps
-RUN sudo add-apt-repository universe
-RUN sudo apt-get update
+RUN add-apt-repository universe
+RUN apt-get update
 RUN apt-get install -y python3
 RUN pip3 install --upgrade pip
 # RUN pip3 install BeautifulSoup4
