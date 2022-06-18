@@ -84,7 +84,7 @@ if __name__ == "__main__":
                 proxy = proxies[random.randint(0, len(proxies))]
                 print("proxy is : ", proxy)
                 test_proxies = {
-                    'https': 'https://{0}:{1}'.format(proxy['host'], proxy['port'])
+                    'https': 'https://{0}:{1}'.format(proxy['ip'], proxy['port'])
                 }
                 response_test = requests.get('https://google.com', proxy=proxy)
                 if response.status_code == 200 :
