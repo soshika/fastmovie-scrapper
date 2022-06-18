@@ -14,11 +14,11 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositorie
 RUN apk update
 RUN apk add make automake gcc g++ subversion python3-dev
 RUN apk add chromium chromium-chromedriver
-RUN pip install --upgrade pip
-RUN pip install BeautifulSoup4
-RUN pip install wheel
-RUN pip install selenium
-RUN pip install -r requirements.txt
-RUN pip install --ignore-installed beautifulsoup4
-CMD tail -f /dev/null
-CMD python digimovie-moviedownloadScrapper.py
+# RUN pip3 install --upgrade pip3
+# RUN pip3 install BeautifulSoup4
+# RUN pip3 install wheel
+# RUN pip3 install selenium
+RUN pip3 install -r requirements.txt
+# RUN pip3 install --ignore-installed beautifulsoup4
+# CMD tail -f /dev/null
+CMD python3 digimovie-moviedownloadScrapper.py
