@@ -82,7 +82,9 @@ if __name__ == "__main__":
 
                 proxy = proxies[random.randint(0, len(proxies))]
                 print("proxy is : ", proxy)
-                os.system('curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port']))
+                cmd = 'curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port'])
+                print('cmd is : ', cmd)
+                os.system(cmd)
 
 
             page_driver.quit()
