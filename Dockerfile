@@ -13,13 +13,17 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositorie
     echo "http://dl-4.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
 RUN apk update
 RUN apk add make automake gcc g++ subversion python3-dev
-RUN apk add libxml2-dev libxslt-dev python-dev
+RUN apk add --update --no-cache g++ gcc libxslt-dev
 RUN apk add chromium chromium-chromedriver
-RUN pip3 install --upgrade pip
+RUN apk add --no-cache --virtual .build-deps gcc libc-dev libxslt-dev && \
+    apk add --no-cache libxslt && \
+    pip install --no-cache-dir lxml>=3.5.0 && \
+    apk del .build-deps
+RUN pip install --upgrade pip
 # RUN pip3 install BeautifulSoup4
 # RUN pip3 install wheel
 # RUN pip3 install selenium
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 # RUN pip3 install --ignore-installed beautifulsoup4
 # CMD tail -f /dev/null
-CMD python3 digimovie-moviedownloadScrapper.py
+CMD python digimovie-moviedownloadScrapper.py
