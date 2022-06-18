@@ -13,12 +13,9 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositorie
     echo "http://dl-4.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
 RUN apk update
 RUN apk add chromium chromium-chromedriver
-RUN pip3 --version
-RUN pip --version
-RUN python --version
-RUN python3 --version
 RUN pip install --upgrade pip
 RUN pip install BeautifulSoup4
+RUN pip install wheel
 RUN pip install selenium
 RUN pip install -r requirements.txt
 RUN pip install --ignore-installed beautifulsoup4
