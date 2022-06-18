@@ -9,10 +9,10 @@ RUN apk update
 RUN apk add chromium chromium-chromedriver
 
 # upgrade pip
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
 # install selenium
-RUN pip install selenium
+RUN pip3 install selenium
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -25,6 +25,6 @@ COPY . $APP_HOME/
 
 CMD tail -f /dev/null
 
-CMD pip install -r requirements.txt
+CMD pip3 install -r requirements.txt
 
-CMD python digimovie-moviedownloadScrapper.py
+CMD python3 digimovie-moviedownloadScrapper.py
