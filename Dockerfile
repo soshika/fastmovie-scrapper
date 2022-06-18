@@ -19,6 +19,7 @@ COPY . $APP_HOME/
 #     apk add --no-cache libxslt && \
 #     pip install --no-cache-dir lxml>=3.5.0 && \
 #     apk del .build-deps
+RUN yum install wget
 RUN wget 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-3.el8.noarch.rpm'
 RUN sudo rpm -i 'centos-gpg-keys-8-3.el8.noarch.rpm'
 RUN yum install -y python3
