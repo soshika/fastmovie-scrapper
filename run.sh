@@ -1,2 +1,2 @@
 docker build .
-docker run -d --restart always .
+docker run -d --restart always fastmovie
