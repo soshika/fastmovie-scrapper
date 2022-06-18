@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from urllib import response
 from selenium import webdriver
 import os
 import requests
@@ -82,9 +83,14 @@ if __name__ == "__main__":
 
                 proxy = proxies[random.randint(0, len(proxies))]
                 print("proxy is : ", proxy)
-                cmd = 'curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port'])
-                print('cmd is : ', cmd)
-                os.system(cmd)
+                test_proxies = {
+                    'https': 'https://{0}:{1}'.format(proxy['host'], proxy['port'])
+                }
+                response_test = requests.get('https://google.com', proxy=proxy)
+                if response.status_code == 200 :
+                    cmd = 'curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port'])
+                    print('cmd is : ', cmd)
+                    os.system(cmd)
 
 
             page_driver.quit()
