@@ -8,5 +8,6 @@ COPY . .
 
 RUN pip3 install -r requirements.txt
 
+RUN export PATH=$PATH:/app/geckodriver
 
 RUN python3 digimovie-moviedownloadScrapper.py
