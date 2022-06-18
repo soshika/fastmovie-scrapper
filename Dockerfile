@@ -19,7 +19,7 @@ COPY . $APP_HOME/
 #     apk add --no-cache libxslt && \
 #     pip install --no-cache-dir lxml>=3.5.0 && \
 #     apk del .build-deps
-RUN RUN apt-get update && \
+RUN apt-get update && \
     apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/*
 RUN add-apt-repository universe
