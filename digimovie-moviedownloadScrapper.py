@@ -86,7 +86,7 @@ if __name__ == "__main__":
                 test_proxies = {
                     'https': 'https://{0}:{1}'.format(proxy['ip'], proxy['port'])
                 }
-                response_test = requests.get('https://google.com', proxies=proxy)
+                response_test = requests.get('https://google.com', proxies=test_proxies)
                 if response.status_code == 200 :
                     cmd = 'curl -x \'http://{1}:{2}\' -O {0}'.format(download_file, proxy['ip'], proxy['port'])
                     print('cmd is : ', cmd)
