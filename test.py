@@ -33,35 +33,35 @@
 
 
 
-from telethon import TelegramClient, sync
-#import logging
+# from telethon import TelegramClient, sync
+# #import logging
 
-api_id=1587025
-api_hash='3ad4a744593f7759ca277eb9041643f5'
+# api_id=1587025
+# api_hash='3ad4a744593f7759ca277eb9041643f5'
 
-#logging.basicConfig(level=logging.DEBUG)
+# #logging.basicConfig(level=logging.DEBUG)
 
-client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
-    # You may want to use proxy to connect to Telegram
-    #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
-)
+# client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
+#     # You may want to use proxy to connect to Telegram
+#     #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
+# )
 
-async def main():
-    async for message in client.iter_messages('@Filimo_Pagee'):
-        print(message.id, message.text)
+# async def main():
+#     async for message in client.iter_messages('@Filimo_Pagee'):
+#         print(message.id, message.text)
 
-        cnt = 0
+#         cnt = 0
 
-        # You can download media from messages, too!
-        # The method will return the path where the file was saved.
-        if message.media:
-            if '480' in message.text:
-                cnt += 1
-                path = await message.download_media()
-                print('File saved to', path)  # printed after download is done
+#         # You can download media from messages, too!
+#         # The method will return the path where the file was saved.
+#         if message.media:
+#             if '480' in message.text:
+#                 cnt += 1
+#                 path = await message.download_media()
+#                 print('File saved to', path)  # printed after download is done
 
-with client:
-    client.loop.run_until_complete(main())
+# with client:
+#     client.loop.run_until_complete(main())
 
 
 # import os
@@ -91,3 +91,30 @@ with client:
 
 
    
+import asyncio
+from pyppeteer import launch
+
+async def main():
+    browser = await launch({"headless": True})
+    [page] = await browser.pages()
+
+    # normally, you go to a live site...
+    #await page.goto("http://www.example.com")
+    # but for this example, just set the HTML directly:
+    await page.setContent("""
+    <body>
+    <script>
+    // inject content dynamically with JS, not part of the static HTML!
+    document.body.innerHTML = `<p>hello world</p>`; 
+    </script>
+    </body>
+    """)
+    print(await page.content()) # shows that the `<p>` was inserted
+
+    # evaluate a JS expression in browser context and scrape the data
+    expr = "document.querySelector('p').textContent"
+    print(await page.evaluate(expr, force_expr=True)) # => hello world
+
+    await browser.close()
+
+asyncio.get_event_loop().run_until_complete(main())
