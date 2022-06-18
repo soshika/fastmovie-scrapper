@@ -33,4 +33,4 @@ RUN pip3 install BeautifulSoup4
 RUN pip3 install -r requirements.txt
 # RUN pip3 install --ignore-installed beautifulsoup4
 # CMD tail -f /dev/null
-CMD python3 digimovie-moviedownloadScrapper.py
+# CMD python3 digimovie-moviedownloadScrapper.py
