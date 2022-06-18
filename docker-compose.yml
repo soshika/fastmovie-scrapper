@@ -1,17 +1,17 @@
 version: "3.3"
-
-fastmovie-scrapper:
-    build: .
-    privileged: true
-    container_name: fastmovie-scrapper
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 10m
-        max-file: "3"
-        labels: "production_status"
-        env: "os"
-    labels:
-      production_status: "testing"
-    environment:
-      - os=ubuntu
+services:
+  fastmovie-scrapper:
+      build: .
+      privileged: true
+      container_name: fastmovie-scrapper
+      logging:
+        driver: "json-file"
+        options:
+          max-size: 10m
+          max-file: "3"
+          labels: "production_status"
+          env: "os"
+      labels:
+        production_status: "testing"
+      environment:
+        - os=ubuntu
