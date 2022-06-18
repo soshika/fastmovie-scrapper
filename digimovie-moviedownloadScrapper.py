@@ -61,7 +61,7 @@ if __name__ == "__main__":
                 download_file = download.get_attribute('href')
                 print('download is about to start at {0} : {1}'.format(datetime.now(), download_file))
                 # wget.download(download_file, 'movie.mp4')
-                os.system('curl -x \'http://91.92.180.45:8080\' -O {0}'.format(download_file))
+                os.system('curl -x \'http://79.127.56.147:8080\' -O {0}'.format(download_file))
 
 
             page_driver.quit()
