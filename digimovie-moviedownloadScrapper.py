@@ -26,10 +26,10 @@ def create_driver(can_download=False):
         profile.set_preference("browser.download.dir","/root/fastmovie/downloads/")
         #Example:profile.set_preference("browser.download.dir", "C:\Tutorial\down")
         profile.set_preference("browser.helperApps.neverAsk.saveToDisk","application/octet-stream")
-        driver = webdriver.Firefox(firefox_profile=profile, options=options)
+        driver = webdriver.Firefox(firefox_profile=profile, options=options, executable_path='./geckdriver')
         return driver
 
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(options=options, executable_path='./geckdriver')
 
     return driver
 
