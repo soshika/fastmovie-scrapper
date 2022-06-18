@@ -1,0 +1,3 @@
+fastmovieScrapper:
+    build: .
+    privileged: true
