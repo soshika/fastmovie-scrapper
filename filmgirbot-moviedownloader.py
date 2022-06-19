@@ -1,4 +1,5 @@
 import requests
+import wget
 from string import digits
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -37,11 +38,11 @@ def create_driver():
     # proxy = proxies[random.randint(0, len(proxies))]
     # print("proxy is : ", proxy)
 
-    PROXY = '188.93.64.242:4153'
+    # PROXY = '188.93.64.242:4153'
     options = Options()
-    options.add_argument('--proxy-server={0}'.format(PROXY))
+    # options.add_argument('--proxy-server={0}'.format(PROXY))
     options.headless = True
-    options.add_argument("download.default_directory=/root/downloads")
+    # options.add_argument("download.default_directory=/root/downloads")
     driver = webdriver.Firefox(options=options)
     return driver
 
@@ -66,8 +67,9 @@ if __name__ == "__main__":
         if parse_file(movie.text) and '480' in movie.text:
             download_link = movie.find('a')['href']
             print('download is about to start {0}'.format(download_link))
-            driver.get(download_link)
-            # cmd = 'curl --tlsv1.2 -x \'http://91.106.64.94:9812\' -O {0}'.format(download_link)
+            wget.download(download_link) 
+            # os.system("https_proxy=http://'188.93.64.242:4153' wget {0}".format(download_link))
+            # cmd = 'curl -x \'https://188.93.64.242:4153\' -O {0}'.format(download_link)
             # print('cmd is : ', cmd)
 
             # os.system(cmd)
