@@ -41,6 +41,7 @@ def create_driver():
     options = Options()
     options.add_argument('--proxy-server={0}'.format(PROXY))
     options.headless = True
+    options.add_argument("download.default_directory=/root/downloads")
     driver = webdriver.Firefox(options=options)
     return driver
 
