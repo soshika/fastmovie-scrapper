@@ -35,6 +35,29 @@ def CreateTableFilimo():
     con.commit()
     con.close()
 
+def CreateTableEmiMovie():
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS emi_movies
+                (
+                    id INTEGER PRIMARY KEY,
+                    sialink VARCHAR(255),
+                    link VARCHAR(255))''')
+    con.commit()
+    con.close()
+
+def InsertTableEmi(sialink, link):
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+    data = [sialink, link]
+    cur.execute('''INSERT INTO filimo_movies
+                    (sialink, link)
+                    VALUES(?, ?);''', data)
+
+    con.commit()
+    con.close()
+
+
 def InsertTable(title, duration, quality, imdb_rate, thumbnail, description, date_uploaded, uploaded_by, countries, directors, cast, generes):
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
@@ -68,4 +91,5 @@ def DropTable():
 if __name__ == "__main__":
     # CreateTable()
     # DropTable()
-    CreateTableFilimo()
+    # CreateTableFilimo()
+    CreateTableEmiMovie
