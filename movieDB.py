@@ -50,7 +50,7 @@ def InsertTableEmi(sialink, link):
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
     data = [sialink, link]
-    cur.execute('''INSERT INTO filimo_movies
+    cur.execute('''INSERT INTO emi_movies
                     (sialink, link)
                     VALUES(?, ?);''', data)
 
@@ -84,7 +84,7 @@ def DropTable():
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
 
-    cur.execute('DROP TABLE filimo_movies')
+    cur.execute('DROP TABLE emi_movies')
     con.commit()
     con.close()
 
