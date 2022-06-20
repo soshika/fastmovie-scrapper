@@ -1,56 +1,38 @@
 import sqlite3
+from sqlite3 import Error
 
-def CreateTable():
-    con = sqlite3.connect('fastmovie-online.db')
-    cur = con.cursor()
-    cur.execute('''CREATE TABLE IF NOT EXISTS movies
-                (
-                    id integer PRIMARY KEY, 
-                    title VARCHAR(255),
-                    duration VARCHAR(64) ,
-                    quality VARCHAR(64),
-                    release_date DATETIME,
-                    imdb_rate VARCHAR(32),
-                    favorite BOOL,
-                    thumbnail VARCHAR(255),
-                    description TEXT,
-                    date_uploaded DATETIME,
-                    uploaded_by INT,
-                    countries VARCHAR(255),
-                    directors VARCHAR(255),
-                    cast VARCHAR(255),
-                    generes VARCHAR(255))''')
-    con.commit()
-    con.close()
+def create_connection(db_file):
+    """ create a database connection to the SQLite database
+        specified by db_file
+        :param db_file: database file
+        :return: Connection object or None
+    """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        return conn
+    except Error as e:
+        print(e)
 
+    return conn
 
-def CreateTableFilimo():
-    con = sqlite3.connect('fastmovie-online.db')
-    cur = con.cursor()
-    cur.execute('''CREATE TABLE IF NOT EXISTS filimo_movies
-                (
-                    id INTEGER PRIMARY KEY,
-                    link VARCHAR(255),
-                    details TEXT)''')
-    con.commit()
-    con.close()
-
-def CreateTableEmiMovie():
-    con = sqlite3.connect('fastmovie-online.db')
-    cur = con.cursor()
-    cur.execute('''CREATE TABLE IF NOT EXISTS emi_movies
-                (
-                    id INTEGER PRIMARY KEY,
-                    sialink VARCHAR(255),
-                    link VARCHAR(255))''')
-    con.commit()
-    con.close()
+def create_table(conn, create_table_sql):
+    """ create a table from the create_table_sql statement
+    :param conn: Connection object
+    :param create_table_sql: a CREATE TABLE statement
+    :return:
+    """
+    try:
+        c = conn.cursor()
+        c.execute(create_table_sql)
+    except Error as e:
+        print(e)
 
 def InsertTableEmi(sialink, link):
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
     data = [sialink, link]
-    cur.execute('''INSERT INTO emi_movies
+    cur.execute('''INSERT INTO emi
                     (sialink, link)
                     VALUES(?, ?);''', data)
 
@@ -88,8 +70,44 @@ def DropTable():
     con.commit()
     con.close()
 
+
+def main():
+    database = 'fastmovie-online.db'
+    movies_table_sql = '''CREATE TABLE IF NOT EXISTS movies
+                (
+                    id integer PRIMARY KEY, 
+                    title VARCHAR(255),
+                    duration VARCHAR(64) ,
+                    quality VARCHAR(64),
+                    release_date DATETIME,
+                    imdb_rate VARCHAR(32),
+                    favorite BOOL,
+                    thumbnail VARCHAR(255),
+                    description TEXT,
+                    date_uploaded DATETIME,
+                    uploaded_by INT,
+                    countries VARCHAR(255),
+                    directors VARCHAR(255),
+                    cast VARCHAR(255),
+                    generes VARCHAR(255))'''
+
+    emi_movies_table_sql = '''CREATE TABLE IF NOT EXISTS emi
+                (
+                    id INTEGER PRIMARY KEY,
+                    sialink VARCHAR(255),
+                    link VARCHAR(255))'''
+    
+    conn = create_connection(database)
+
+    if conn is not None:
+        # create projects table
+        create_table(conn, movies_table_sql)
+
+        # create tasks table
+        create_table(conn, emi_movies_table_sql)
+    else:
+        print("Error! cannot create the database connection.")
+    
+
 if __name__ == "__main__":
-    # CreateTable()
-    # DropTable()
-    # CreateTableFilimo()
-    CreateTableEmiMovie
+    main()
