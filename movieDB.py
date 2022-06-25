@@ -39,6 +39,17 @@ def InsertTableEmi(sialink, link):
     con.commit()
     con.close()
 
+def InsertTableCnama(download_link, link):
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+    data = [download_link, link]
+    cur.execute('''INSERT INTO cnama
+                    (download_link, link)
+                    VALUES(?, ?);''', data)
+
+    con.commit()
+    con.close()
+
 
 def InsertTable(title, duration, quality, imdb_rate, thumbnail, description, date_uploaded, uploaded_by, countries, directors, cast, generes):
     con = sqlite3.connect('fastmovie-online.db')
@@ -96,15 +107,26 @@ def main():
                     id INTEGER PRIMARY KEY,
                     sialink VARCHAR(255),
                     link VARCHAR(255))'''
+
+
+    cnama_movies_table_sql = '''CREATE TABLE IF NOT EXISTS cnama
+                (
+                    id INTEGER PRIMARY KEY,
+                    download_link TEXT,
+                    link VARCHAR(255))'''
     
     conn = create_connection(database)
 
     if conn is not None:
-        # create projects table
+        # create movies table
         create_table(conn, movies_table_sql)
 
-        # create tasks table
+        # create emi-movie table
         create_table(conn, emi_movies_table_sql)
+
+        # create cnama-movies
+        create_table(conn, cnama_movies_table_sql)
+
     else:
         print("Error! cannot create the database connection.")
     
