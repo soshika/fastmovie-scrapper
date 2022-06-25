@@ -82,6 +82,16 @@ def DropTable():
     con.close()
 
 
+def selectTable():
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM cnama")
+
+    rows = cur.fetchall()
+
+    return rows
+
 def main():
     database = 'fastmovie-online.db'
     movies_table_sql = '''CREATE TABLE IF NOT EXISTS movies
