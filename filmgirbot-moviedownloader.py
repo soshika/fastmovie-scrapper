@@ -1,5 +1,5 @@
 import requests
-import wget
+import socket
 from string import digits
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -43,7 +43,7 @@ def create_driver():
     # options.add_argument('--proxy-server={0}'.format(PROXY))
     options.headless = True
     # options.add_argument("download.default_directory=/root/downloads")
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(options=options, executable_path='./geckodriver')
     return driver
 
 if __name__ == "__main__":
@@ -67,11 +67,18 @@ if __name__ == "__main__":
         if parse_file(movie.text) and '480' in movie.text:
             download_link = movie.find('a')['href']
             print('download is about to start {0}'.format(download_link))
-            wget.download(download_link) 
+            # wget.download(download_link) 
+            # print(download_link)
+            # r = requests.get(download_link, stream=True, proxies={'http': 'http://188.93.64.242:4153', 'https': 'https://188.93.64.242:4153'})
+            # file_name = download_link.split('/')[-1].replace('.', '_')
+            # print(file_name)
+            # with open('test.mkv', 'wb') as f:
+            #     f.write(r.content)
+        
             # os.system("https_proxy=http://'188.93.64.242:4153' wget {0}".format(download_link))
-            # cmd = 'curl -x \'https://188.93.64.242:4153\' -O {0}'.format(download_link)
-            # print('cmd is : ', cmd)
+            cmd = 'curl -x \'https://5.161.63.222:3128\' -O {0}'.format(download_link)
+            print('cmd is : ', cmd)
 
-            # os.system(cmd)
+            os.system(cmd)
 
     

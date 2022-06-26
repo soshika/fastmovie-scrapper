@@ -40,7 +40,7 @@ def create_driver():
     options = Options()
     options.add_argument('--proxy-server={0}:{1}'.format(proxy['ip'], proxy['port']) )
     options.headless = True
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(options=options, executable_path='./geckodriver')
 
     return driver
 

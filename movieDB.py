@@ -103,6 +103,20 @@ def selectTable():
 
     return rows
 
+
+def delete_task(id):
+    """
+    Delete a task by task id
+    :param conn:  Connection to the SQLite database
+    :param id: id of the task
+    :return:
+    """
+    con = sqlite3.connect('fastmovie-online.db')
+    sql = 'DELETE FROM cnama WHERE id=?'
+    cur = con.cursor()
+    cur.execute(sql, (id,))
+    con.commit()
+
 def main():
     database = 'fastmovie-online.db'
     movies_table_sql = '''CREATE TABLE IF NOT EXISTS movies

@@ -32,19 +32,40 @@
 # entry.send_keys(password) 
 
 
+from telethon import TelegramClient, sync
+from telethon import functions, types
+import datetime
+from telethon.tl.functions.messages import GetInlineBotResultsRequest
 
-# from telethon import TelegramClient, sync
-# #import logging
 
-# api_id=1587025
-# api_hash='3ad4a744593f7759ca277eb9041643f5'
+#import logging
 
-# #logging.basicConfig(level=logging.DEBUG)
+api_id=1587025
+api_hash='3ad4a744593f7759ca277eb9041643f5'
+
+#logging.basicConfig(level=logging.DEBUG)
 
 # client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
 #     # You may want to use proxy to connect to Telegram
 #     #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
 # )
+
+from telethon.sync import TelegramClient
+from telethon import functions, types
+
+with TelegramClient("FastMovie.onlineSession", api_id, api_hash) as client:
+    result = client(functions.messages.GetInlineBotResultsRequest(
+        bot='@FileMovieBot',
+        peer='me',
+        query='@Searchimdbbot joker',
+        offset='@Searchimdbbot joker',
+        geo_point=types.InputGeoPoint(
+            lat=7.13,
+            long=7.13,
+            accuracy_radius=42
+        )
+    ))
+    print(result.stringify())
 
 # async def main():
 #     async for message in client.iter_messages('@Filimo_Pagee'):
@@ -91,30 +112,60 @@
 
 
    
-import asyncio
-from pyppeteer import launch
+# import asyncio
+# from pyppeteer import launch
 
-async def main():
-    browser = await launch({"headless": True})
-    [page] = await browser.pages()
+# async def main():
+#     browser = await launch({"headless": True})
+#     [page] = await browser.pages()
 
-    # normally, you go to a live site...
-    #await page.goto("http://www.example.com")
-    # but for this example, just set the HTML directly:
-    await page.setContent("""
-    <body>
-    <script>
-    // inject content dynamically with JS, not part of the static HTML!
-    document.body.innerHTML = `<p>hello world</p>`; 
-    </script>
-    </body>
-    """)
-    print(await page.content()) # shows that the `<p>` was inserted
+#     # normally, you go to a live site...
+#     #await page.goto("http://www.example.com")
+#     # but for this example, just set the HTML directly:
+#     await page.setContent("""
+#     <body>
+#     <script>
+#     // inject content dynamically with JS, not part of the static HTML!
+#     document.body.innerHTML = `<p>hello world</p>`; 
+#     </script>
+#     </body>
+#     """)
+#     print(await page.content()) # shows that the `<p>` was inserted
 
-    # evaluate a JS expression in browser context and scrape the data
-    expr = "document.querySelector('p').textContent"
-    print(await page.evaluate(expr, force_expr=True)) # => hello world
+#     # evaluate a JS expression in browser context and scrape the data
+#     expr = "document.querySelector('p').textContent"
+#     print(await page.evaluate(expr, force_expr=True)) # => hello world
 
-    await browser.close()
+#     await browser.close()
 
-asyncio.get_event_loop().run_until_complete(main())
+# asyncio.get_event_loop().run_until_complete(main())
+
+
+#http://dl7.freeserver.top/www2/film/1401/03/Happening.2021.1080p.BluRay.SoftSub.DigiMoviez.mkv
+
+# url = 'http://dl7.freeserver.top/www2/film/1401/03/Happening.2021.1080p.BluRay.SoftSub.DigiMoviez.mkv'
+
+# print(url.split('/')[-1])
+
+# import requests
+
+# def get_proxy():
+#     url = "https://www.proxydocker.com/en/proxylist/api?email=zsaman37@yahoo.com&country=IRAN&city=all&port=all&type=https&anonymity=ELITE&state=all&need=all&format=json"
+
+#     payload={}
+#     headers = {
+#     'Cookie': 'AWSALB=Q0zb2wUVwOX3+lr0bMgppViA5Y0ivJXlfgyXz8iNmft5CtboAA62r21yDUnYspfhpIFWQTeJgHOIvuJyK33/Jv6EEQomF+kYkC5Ojz0tClpYFjgYYQMyiXdtt3Fv; AWSALBCORS=Q0zb2wUVwOX3+lr0bMgppViA5Y0ivJXlfgyXz8iNmft5CtboAA62r21yDUnYspfhpIFWQTeJgHOIvuJyK33/Jv6EEQomF+kYkC5Ojz0tClpYFjgYYQMyiXdtt3Fv'
+#     }
+
+#     response = requests.request("GET", url, headers=headers, data=payload)
+
+#     data = response.json()
+#     return data
+
+
+# proxies_dic = get_proxy()
+# proxies = proxies_dic['Proxies']
+
+
+# for proxy in proxies:
+#     print(proxy)
