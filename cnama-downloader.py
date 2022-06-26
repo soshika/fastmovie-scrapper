@@ -40,14 +40,17 @@ if __name__ == "__main__":
             if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
                 dp['{0}-1080'.format(row[2])] = True
                 download_upload(link)
+                movieDB.delete_task(row[0])
             
             elif '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
                 dp['{0}-720'.format(row[2])] = True
                 download_upload(link)
+                movieDB.delete_task(row[0])
 
             elif '480' in info.headers['Content-Disposition'] and '{0}-480'.format(row[2]) not in dp:
                 dp['{0}-480'.format(row[2])] = True
                 download_upload(link)
+                movieDB.delete_task(row[0])
 
                 
             
