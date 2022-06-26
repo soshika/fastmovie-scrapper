@@ -36,7 +36,7 @@ if __name__ == "__main__":
         info = requests.head(link)
         size = int(info.headers['Content-Length'])/ 1000000000
 
-        if size <= 3.00:
+        if size <= 2.50:
             if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
                 dp['{0}-1080'.format(row[2])] = True
                 download_upload(link)
