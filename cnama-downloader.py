@@ -3,6 +3,7 @@ import movieDB
 import os
 import wget
 import siaskynet as skynet
+import urllib.request as ur
 
 def download_upload(link,file_name):
     print('download is about start  {0}'.format(file_name))
@@ -33,7 +34,7 @@ if __name__ == "__main__":
 
     for row in rows:
         link = row[1]
-        info = requests.head(link)
+        info = ur.urlopen(link)
         try:
             size = int(info.headers['Content-Length'])/ 1000000000
 
