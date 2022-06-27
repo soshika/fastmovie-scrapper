@@ -155,6 +155,13 @@ def main():
                     id INTEGER PRIMARY KEY,
                     download_link TEXT,
                     link VARCHAR(255))'''
+
+    telegram_table_sql = '''CREATE TABLE IF NOT EXISTS telegram
+                ( 
+                    id INTEGER PRIMARY KEY,
+                    download_link TEXT,
+                    description TEXT)'''
+                
     
     conn = create_connection(database)
 
@@ -170,9 +177,15 @@ def main():
 
         create_table(conn, cnama_series_table_sql)
 
+        # create table telegram
+        create_table(conn,telegram_table_sql)
+
     else:
         print("Error! cannot create the database connection.")
     
 
 if __name__ == "__main__":
     main()
+
+    # for i in range(122, 123):
+    #     delete_task(i)

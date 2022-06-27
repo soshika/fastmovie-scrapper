@@ -17,45 +17,31 @@ client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
 
 async def main():
     can_download = False
-    async for message in client.iter_messages('@Filimo_Pagee'):
+    async for message in client.iter_messages('@Filimo_Page'):
         cnt = 0
         # You can download media from messages, too!
         # The method will return the path where the file was saved.
         if message.media:
-            if str(message.text) == '''🎥 مسابقه شب های مافیا ۴
-🎞 قسمت دوم
-📼 فصل چهارم
-💠 نسخه اورجینال
-🔰 ژانر: خانوادگی| اجتماعی  
-🎞 کیفیت 720p
-📎لینک دانلود [نیم‌بها] :
-https://2ad.ir/WVCwNaU
+            if ('360' in str(message.text)) or ('720' in str(message.text)) or ('1080' in str(message.text)) :
+                print(message.text)
+                cnt += 1
+                path = await message.download_media()
+                directory = directory = os.getcwd()
+                file_path = directory + '/' + path
 
-🎥 | @Filimo_Page 🎭''':
-                can_download = True
-            if can_download:
-                print('Download Startedddddddddddddddddddddd')
+                print('File saved to', file_path)
 
-                if ('360' in str(message.text)) or ('720' in str(message.text)) or ('1080' in str(message.text)) :
-                    print(message.text)
-                    cnt += 1
-                    path = await message.download_media()
-                    directory = directory = os.getcwd()
-                    file_path = directory + '/' + path
+                # link to skynet
+                skylink_client = skynet.SkynetClient() 
+                skylink = skylink_client.upload_file(file_path)
+                print("File {0} Uploaded successfully: link is {1} ".format(path, skylink))
 
-                    print('File saved to', file_path)
+                # remove from server
+                os.remove(file_path)
+                print("File {0} deleted from server successfully".format(file_path))
 
-                    # link to skynet
-                    skylink_client = skynet.SkynetClient() 
-                    skylink = skylink_client.upload_file(file_path)
-                    print("File {0} Uploaded successfully: link is {1} ".format(path, skylink))
-
-                    # remove from server
-                    os.remove(file_path)
-                    print("File {0} deleted from server successfully".format(file_path))
-
-                    print(str(message.text))
-                    movieDB.InserTableFilimo(skylink, str(message.text))
+                print(str(message.text))
+                movieDB.InserTableFilimo(skylink, str(message.text))
 
         print('-'*50)
     
