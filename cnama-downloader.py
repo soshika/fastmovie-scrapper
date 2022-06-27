@@ -40,9 +40,9 @@ if __name__ == "__main__":
             print('size of file is : ', size)
         except Exception as err:
             print(err)
-
-        print(row)
+        
         if size <= 2.50:
+            print(row)
             if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
                 dp['{0}-1080'.format(row[2])] = True
                 download_upload(link, row[2])
