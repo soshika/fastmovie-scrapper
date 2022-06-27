@@ -30,10 +30,8 @@ if __name__ == "__main__":
    
     dp = dict()
     rows = movieDB.selectTable()
-    print(len(rows))
 
     for row in rows:
-        print('hereeee 1')
         link = row[1]
         info = requests.head(link)
         try:
@@ -43,6 +41,7 @@ if __name__ == "__main__":
         except Exception as err:
             print(err)
 
+        print(row)
         if size <= 2.50:
             if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
                 dp['{0}-1080'.format(row[2])] = True
