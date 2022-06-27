@@ -78,7 +78,7 @@ def InserTableFilimo(link, details):
     cur = con.cursor()
     data = [link, details]
     cur.execute('''INSERT INTO telegram
-                    (link, description)
+                    (download_link, description)
                     VALUES(?, ?);''', data)
 
     con.commit()
