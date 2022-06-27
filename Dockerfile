@@ -27,7 +27,7 @@ RUN apt-get update
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 # RUN pip3 install --upgrade pip
-RUN pip3 install bs4
+# RUN pip3 install beautifulsoup4
 # RUN pip3 install wheel
 # RUN pip3 install selenium
 RUN pip3 install -r requirements.txt
