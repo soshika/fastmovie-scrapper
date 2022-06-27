@@ -33,9 +33,12 @@ if __name__ == "__main__":
     print(len(rows))
 
     for row in rows:
+        print('hereeee 1')
         link = row[1]
         info = requests.head(link)
         size = int(info.headers['Content-Length'])/ 1000000000
+
+        print('hereee 222')
 
         if size <= 2.50:
             if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
