@@ -36,9 +36,12 @@ if __name__ == "__main__":
         print('hereeee 1')
         link = row[1]
         info = requests.head(link)
-        size = int(info.headers['Content-Length'])/ 1000000000
+        try:
+            size = int(info.headers['Content-Length'])/ 1000000000
 
-        print('hereee 222')
+            print('size of file is : ', size)
+        except Exception as err:
+            print(err)
 
         if size <= 2.50:
             if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
