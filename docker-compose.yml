@@ -15,3 +15,5 @@ services:
         production_status: "testing"
       environment:
         - os=ubuntu
+      volumes:
+        - /root/fastmovie/fastmovie-scrapper:/usr/src/app
