@@ -22,7 +22,7 @@ def download_upload(link):
     os.remove(file_path)
     print("File {0} deleted from server successfully".format(movie_name))
 
-    movieDB.InsertTableEmi(skylink, link)
+    movieDB.InsertTableEmi(skylink, row[2])
     print("Inserted into DB Successfully")
     print('-'*50)
 
