@@ -30,6 +30,7 @@ if __name__ == "__main__":
    
     dp = dict()
     rows = movieDB.selectTable()
+    print(len(rows))
 
     for row in rows:
         link = row[1]
