@@ -77,8 +77,8 @@ def InserTableFilimo(link, details):
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
     data = [link, details]
-    cur.execute('''INSERT INTO filimo_movies
-                    (link, details)
+    cur.execute('''INSERT INTO telegram
+                    (link, description)
                     VALUES(?, ?);''', data)
 
     con.commit()
