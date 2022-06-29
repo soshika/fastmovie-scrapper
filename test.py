@@ -175,15 +175,17 @@ import os
 import requests
 import siaskynet as skynet
 
-url = 'https://eu.cdn.cloudam.cc/download/2/2/825041/97248/8217/46.105.134.229/1656257749/304020a693b713e5b017e74c4e6dc256aedd00405a/movies/c/Crank_High_Voltage_2009_720p_BrRip_YIFY_30NAMA.mp4'
+url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/4429/12157/89.39.107.146/1656604841/3094413270d8ac3335fd7d49d5a1f5a8d99a44e8fa/series/friends/Friends_S03E01_UNCUT_DVDRip_30NAMA.avi'
 
 r = requests.get(url, allow_redirects=True)
 with open('test.mp4', 'wb') as f:
     f.write(r.content)
 
+print('downloaded')
+
 directory = os.getcwd()
-file_path = directory + '/' + 'test.mkv'
+file_path = directory + '/' + 'test.avi'
 
 client = skynet.SkynetClient() 
 skylink = client.upload_file(file_path)
-print("File {0} Uploaded successfully: link is {1} ".format(file_name, skylink))
+print("Uploaded successfully: link is {0} ".format(skylink))
