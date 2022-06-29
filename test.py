@@ -171,6 +171,7 @@
 #     print(proxy)
 
 import wget
+import os
 import siaskynet as skynet
 
 url = 'https://eu.cdn.cloudam.cc/download/2/2/825041/833066/161828/46.105.134.229/1656257698/30d8a28f3d7a682299a29d2daf5e15c4a18166ef34/movies/h/Halloween_2018_10bit_1080p_x265_BrRip_30nama_30NAMA.mkv'
@@ -179,6 +180,9 @@ file_name = wget.download(url)
 with open('test.mkv', 'wb') as f:
     f.write(file_name.content)
 
+directory = os.getcwd()
+file_path = directory + '/' + 'test.mkv'
+
 client = skynet.SkynetClient() 
 skylink = client.upload_file(file_path)
-print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
+print("File {0} Uploaded successfully: link is {1} ".format(file_name, skylink))
