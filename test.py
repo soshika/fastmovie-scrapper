@@ -178,7 +178,7 @@ import siaskynet as skynet
 url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/4429/12157/89.39.107.146/1656604841/3094413270d8ac3335fd7d49d5a1f5a8d99a44e8fa/series/friends/Friends_S03E01_UNCUT_DVDRip_30NAMA.avi'
 
 headers = {'Content-Disposition': 'inline; filename=https://eu.cdn.cloudam.cc/download/2/4/825041/4429/12157/89.39.107.146/1656604841/3094413270d8ac3335fd7d49d5a1f5a8d99a44e8fa/series/friends/Friends_S03E01_UNCUT_DVDRip_30NAMA.avi'}
-r = requests.get(url, allow_redirects=True)
+r = requests.get(url, allow_redirects=True, headers=headers)
 with open('test.avi', 'wb') as f:
     f.write(r.content)
 
