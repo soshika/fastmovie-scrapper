@@ -175,9 +175,13 @@ import os
 import requests
 import siaskynet as skynet
 
-url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/4429/12157/89.39.107.146/1656604841/3094413270d8ac3335fd7d49d5a1f5a8d99a44e8fa/series/friends/Friends_S03E01_UNCUT_DVDRip_30NAMA.avi'
+url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/4431/12157/89.39.107.146/1656604841/305c007070bedb9fba5d5a2728d95745a670b10e27/series/friends/Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'
 
-headers = {'Content-Disposition': 'inline; filename=Friends_S03E01_UNCUT_DVDRip_30NAMA.avi'}
+headers = {'Content-Disposition': 'inline; filename=Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'}
+# req = Request('GET', url)
+# prepared = req.prepare()
+# del prepared.headers['Content-Disposition']
+
 r = requests.get(url, headers=headers)
 with open('test.avi', 'wb') as f:
     f.write(r.content)
