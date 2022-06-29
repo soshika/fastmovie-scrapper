@@ -175,21 +175,27 @@ import os
 import requests
 import siaskynet as skynet
 
-url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/4431/12157/89.39.107.146/1656604841/305c007070bedb9fba5d5a2728d95745a670b10e27/series/friends/Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'
+from requests import Request, Session
 
-headers = {'Content-Disposition': 'inline; filename=Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'}
-# req = Request('GET', url)
-# prepared = req.prepare()
+url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/829612/338013/46.105.134.229/1656609140/300e9863a92ddf46c7a529170193202eb9bbd57bed/series/birdgirl/Birdgirl_S02E01_480p_WEB-DL_RMTeam_30NAMA.mkv'
+
+# headers = {'Content-Disposition': 'inline; filename=Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'}
+s = Session()
+req = Request('GET', url)
+prepared = req.prepare()
 # del prepared.headers['Content-Disposition']
+prepared.headers['Content-Disposition'] = 'inline; filename=Birdgirl_S02E01_480p_WEB-DL_RMTeam_30NAMA.mkv'
 
-r = requests.get(url, headers=headers)
-with open('test.avi', 'wb') as f:
-    f.write(r.content)
+response = s.send(prepared)
+
+# r = requests.get(url, headers=headers)
+with open('test.mkv', 'wb') as f:
+    f.write(response.content)
 
 print('downloaded')
 
 directory = os.getcwd()
-file_path = directory + '/' + 'test.avi'
+file_path = directory + '/' + 'test.mkv'
 
 client = skynet.SkynetClient() 
 skylink = client.upload_file(file_path)
