@@ -32,40 +32,40 @@
 # entry.send_keys(password) 
 
 
-from telethon import TelegramClient, sync
-from telethon import functions, types
-import datetime
-from telethon.tl.functions.messages import GetInlineBotResultsRequest
+# from telethon import TelegramClient, sync
+# from telethon import functions, types
+# import datetime
+# from telethon.tl.functions.messages import GetInlineBotResultsRequest
 
 
-#import logging
+# #import logging
 
-api_id=1587025
-api_hash='3ad4a744593f7759ca277eb9041643f5'
+# api_id=1587025
+# api_hash='3ad4a744593f7759ca277eb9041643f5'
 
-#logging.basicConfig(level=logging.DEBUG)
+# #logging.basicConfig(level=logging.DEBUG)
 
-# client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
-#     # You may want to use proxy to connect to Telegram
-#     #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
-# )
+# # client = TelegramClient('FastMovie.onlineSession', api_id, api_hash,
+# #     # You may want to use proxy to connect to Telegram
+# #     #proxy=(socks.SOCKS5, 'PROXYHOST', PORT, 'PROXYUSERNAME', 'PROXYPASSWORD')
+# # )
 
-from telethon.sync import TelegramClient
-from telethon import functions, types
+# from telethon.sync import TelegramClient
+# from telethon import functions, types
 
-with TelegramClient("FastMovie.onlineSession", api_id, api_hash) as client:
-    result = client(functions.messages.GetInlineBotResultsRequest(
-        bot='@FileMovieBot',
-        peer='me',
-        query='@Searchimdbbot joker',
-        offset='@Searchimdbbot joker',
-        geo_point=types.InputGeoPoint(
-            lat=7.13,
-            long=7.13,
-            accuracy_radius=42
-        )
-    ))
-    print(result.stringify())
+# with TelegramClient("FastMovie.onlineSession", api_id, api_hash) as client:
+#     result = client(functions.messages.GetInlineBotResultsRequest(
+#         bot='@FileMovieBot',
+#         peer='me',
+#         query='@Searchimdbbot joker',
+#         offset='@Searchimdbbot joker',
+#         geo_point=types.InputGeoPoint(
+#             lat=7.13,
+#             long=7.13,
+#             accuracy_radius=42
+#         )
+#     ))
+#     print(result.stringify())
 
 # async def main():
 #     async for message in client.iter_messages('@Filimo_Pagee'):
@@ -169,3 +169,16 @@ with TelegramClient("FastMovie.onlineSession", api_id, api_hash) as client:
 
 # for proxy in proxies:
 #     print(proxy)
+
+import wget
+import siaskynet as skynet
+
+url = 'https://eu.cdn.cloudam.cc/download/2/2/825041/833066/161828/46.105.134.229/1656257698/30d8a28f3d7a682299a29d2daf5e15c4a18166ef34/movies/h/Halloween_2018_10bit_1080p_x265_BrRip_30nama_30NAMA.mkv'
+
+file_name = wget.download(url)
+with open('test.mkv', 'wb') as f:
+    f.write(file_name.content)
+
+client = skynet.SkynetClient() 
+skylink = client.upload_file(file_path)
+print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
