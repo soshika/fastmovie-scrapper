@@ -174,10 +174,10 @@ import wget
 import os
 import siaskynet as skynet
 
-url = 'https://eu.cdn.cloudam.cc/download/2/2/825041/833066/161828/46.105.134.229/1656257698/30d8a28f3d7a682299a29d2daf5e15c4a18166ef34/movies/h/Halloween_2018_10bit_1080p_x265_BrRip_30nama_30NAMA.mkv'
+url = 'https://eu.cdn.cloudam.cc/download/2/2/825041/97248/8217/46.105.134.229/1656257749/304020a693b713e5b017e74c4e6dc256aedd00405a/movies/c/Crank_High_Voltage_2009_720p_BrRip_YIFY_30NAMA.mp4'
 
 file_name = wget.download(url)
-with open('test.mkv', 'wb') as f:
+with open('test.mp4', 'wb') as f:
     f.write(file_name.content)
 
 directory = os.getcwd()
