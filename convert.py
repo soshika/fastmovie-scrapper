@@ -4,7 +4,7 @@ import siaskynet as skynet
 
 if __name__ == "__main__":
 
-    url = 'http://siasky.net/GAARGZ0tTTSjf0bFwtFcIJlmuWSGdBAaccyLbNQZ7M-zbw'
+    url = 'https://didi2.ir/bestsitcomdl/Friends/s01/Friends.S01E01.720p.BluRay.SoftSub.bestsitcom.mkv'
     name = wget.download(url)
     print('file {0} downloaded successfully'.format(name))
 
