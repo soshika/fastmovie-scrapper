@@ -2,6 +2,7 @@ version: "3.3"
 services:
   fastmovie-scrapper:
       build: .
+      restart: always
       privileged: true
       container_name: fastmovie-scrapper
       logging:
