@@ -7,7 +7,12 @@ import urllib.request as ur
 
 def download_upload(link,file_name):
     print('download is about start  {0}'.format(file_name))
-    movie_name = wget.download(link)
+    try:
+        movie_name = wget.download(link)
+    except Exception as err :
+        print(err)
+        return 
+
     print('\nFile {0} Downloaded Successfully'.format(movie_name))
 
     # get current directory
