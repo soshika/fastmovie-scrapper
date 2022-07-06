@@ -49,20 +49,14 @@ if __name__ == "__main__":
         
         if size <= 2.50:
             print(row)
-            if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
+            if '1080' in info.headers['Content-Disposition'] and 'x265' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
                 dp['{0}-1080'.format(row[2])] = True
                 download_upload(link, row[2])
                 movieDB.delete_task(row[0])
             
-            elif '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
+            elif '720' in info.headers['Content-Disposition'] and 'x265' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
                 dp['{0}-720'.format(row[2])] = True
                 download_upload(link, row[2])
                 movieDB.delete_task(row[0])
-
-            elif '480' in info.headers['Content-Disposition'] and '{0}-480'.format(row[2]) not in dp:
-                dp['{0}-480'.format(row[2])] = True
-                download_upload(link, row[2])
-                movieDB.delete_task(row[0])
-
                 
             
