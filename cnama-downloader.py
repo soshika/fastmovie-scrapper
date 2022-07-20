@@ -47,14 +47,9 @@ if __name__ == "__main__":
         except Exception as err:
             print(err)
         
-        if size <= 2.50:
+        if size <= 1.2:
             print(row)
-            if '1080' in info.headers['Content-Disposition'] and '{0}-1080'.format(row[2]) not in dp:
-                dp['{0}-1080'.format(row[2])] = True
-                download_upload(link, row[2])
-                movieDB.delete_task(row[0])
-            
-            elif '720' in info.headers['Content-Disposition'] and 'x265' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
+            if '720' in info.headers['Content-Disposition'] and 'x265' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
                 dp['{0}-720'.format(row[2])] = True
                 download_upload(link, row[2])
                 movieDB.delete_task(row[0])

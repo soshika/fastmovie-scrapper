@@ -170,33 +170,38 @@
 # for proxy in proxies:
 #     print(proxy)
 
-import wget
-import os
-import requests
-import siaskynet as skynet
+# import wget
+# import os
+# import requests
+# import siaskynet as skynet
 
-from requests import Request, Session
+# from requests import Request, Session
 
-url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/829612/338013/46.105.134.229/1656609140/300e9863a92ddf46c7a529170193202eb9bbd57bed/series/birdgirl/Birdgirl_S02E01_480p_WEB-DL_RMTeam_30NAMA.mkv'
+# url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/829612/338013/46.105.134.229/1656609140/300e9863a92ddf46c7a529170193202eb9bbd57bed/series/birdgirl/Birdgirl_S02E01_480p_WEB-DL_RMTeam_30NAMA.mkv'
 
-# headers = {'Content-Disposition': 'inline; filename=Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'}
-s = Session()
-req = Request('GET', url)
-prepared = req.prepare()
-# del prepared.headers['Content-Disposition']
-prepared.headers['Content-Disposition'] = 'inline; filename=Birdgirl_S02E01_480p_WEB-DL_RMTeam_30NAMA.mkv'
+# # headers = {'Content-Disposition': 'inline; filename=Friends_S03E03_UNCUT_DVDRip_30NAMA.avi'}
+# s = Session()
+# req = Request('GET', url)
+# prepared = req.prepare()
+# # del prepared.headers['Content-Disposition']
+# prepared.headers['Content-Disposition'] = 'inline; filename=Birdgirl_S02E01_480p_WEB-DL_RMTeam_30NAMA.mkv'
 
-response = s.send(prepared)
+# response = s.send(prepared)
 
-# r = requests.get(url, headers=headers)
-with open('test.mkv', 'wb') as f:
-    f.write(response.content)
+# # r = requests.get(url, headers=headers)
+# with open('test.mkv', 'wb') as f:
+#     f.write(response.content)
 
-print('downloaded')
+# print('downloaded')
 
-directory = os.getcwd()
-file_path = directory + '/' + 'test.mkv'
+# directory = os.getcwd()
+# file_path = directory + '/' + 'test.mkv'
 
-client = skynet.SkynetClient() 
-skylink = client.upload_file(file_path)
-print("Uploaded successfully: link is {0} ".format(skylink))
+# client = skynet.SkynetClient() 
+# skylink = client.upload_file(file_path)
+# print("Uploaded successfully: link is {0} ".format(skylink))
+
+
+import zipfile
+with zipfile.ZipFile("joker.zip","r") as zip_ref:
+    zip_ref.extractall("joker-sub")

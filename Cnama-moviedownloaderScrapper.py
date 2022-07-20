@@ -1,7 +1,6 @@
 from re import sub
 from urllib import response
 import movieDB
-from selenium import webdriver
 import os
 import requests
 import random
