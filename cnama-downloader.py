@@ -38,20 +38,19 @@ if __name__ == "__main__":
     rows = movieDB.selectTable()
 
     for row in rows:
-        link = row[1]
-        info = ur.urlopen(link)
-        try:
-            size = int(info.headers['Content-Length'])/ 1000000000
-
-            print('size of file is : ', size)
-        except Exception as err:
-            print(err)
-        
-        if size <= 1.2:
-            print(row)
-            if '720' in info.headers['Content-Disposition'] and 'x265' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
-                dp['{0}-720'.format(row[2])] = True
-                download_upload(link, row[2])
-                movieDB.delete_task(row[0])
+        if '720' in row[1]:
+            link = row[1]
+            info = ur.urlopen(link)
+            try:
+                size = int(info.headers['Content-Length'])/ 1000000000
+                print('size of file is : ', size)
+            except Exception as err:
+                print(err)
+            
+            if size <= 1.2:
+                if '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
+                    dp['{0}-720'.format(row[2])] = True
+                    download_upload(link, row[2])
+                    movieDB.delete_task(row[0])
                 
             
