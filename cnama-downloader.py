@@ -51,15 +51,15 @@ if __name__ == "__main__":
                 if '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
                     dp['{0}-720'.format(row[2])] = True
                     quality = '720p-'
-                    if 'x265' in row[2]:
+                    if 'x265' in row[1]:
                         quality = quality + 'x265-'
-                    if '10bit' in row[2]:
+                    if '10bit' in row[1]:
                         quality = quality + '10bkt-'
-                    if 'BrRip' in row[2]:
+                    if 'BrRip' in row[1]:
                         quality = quality + 'BrRip-'
-                    if 'DVDRip' in row[2]:
+                    if 'DVDRip' in row[1]:
                         quality = quality + 'DVDRip-'
-                    if 'BluRay' in row[2]:
+                    if 'BluRay' in row[1]:
                         quality = quality + 'BluRay-'
                     
                     print(link, row[2], size, quality)
