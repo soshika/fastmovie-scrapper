@@ -34,7 +34,7 @@ def InsertTableEmi(sialink, link, size, quality):
     data = [sialink, link, size, quality]
     cur.execute('''INSERT INTO emi
                     (sialink, link, filesize, quality)
-                    VALUES(?, ?, ?);''', data)
+                    VALUES(?, ?, ?, ?);''', data)
 
     con.commit()
     con.close()
