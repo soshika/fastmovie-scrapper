@@ -5,7 +5,7 @@ import wget
 import siaskynet as skynet
 import urllib.request as ur
 
-def download_upload(link,file_name):
+def download_upload(link, file_name, size, quality):
     print('download is about start  {0}'.format(file_name))
     try:
         movie_name = wget.download(link)
@@ -28,7 +28,7 @@ def download_upload(link,file_name):
     os.remove(file_path)
     print("File {0} deleted from server successfully".format(movie_name))
 
-    movieDB.InsertTableEmi(skylink, file_name)
+    movieDB.InsertTableEmi(skylink, file_name, size)
     print("Inserted into DB Successfully")
     print('-'*50)
 
@@ -50,7 +50,18 @@ if __name__ == "__main__":
             if size <= 1.2:
                 if '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
                     dp['{0}-720'.format(row[2])] = True
-                    download_upload(link, row[2])
+                    quality = '720p-'
+                    if 'x265' in row[2]:
+                        quality = quality + 'x265-'
+                    if '10bit' in row[2]:
+                        quality = quality + '10bkt-'
+                    if 'BrRip' in row[2]:
+                        quality = quality + 'BrRip-'
+                    if 'DVDRip' in row[2]:
+                        quality = quality + 'DVDRip-'
+                    if 'BluRay' in row[2]:
+                        quality = quality + 'BluRay-'
+                    download_upload(link, row[2], size, quality)
                     movieDB.delete_task(row[0])
                 
             

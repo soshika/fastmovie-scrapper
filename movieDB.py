@@ -28,13 +28,13 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
-def InsertTableEmi(sialink, link):
+def InsertTableEmi(sialink, link, size, quality):
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
-    data = [sialink, link]
+    data = [sialink, link, size, quality]
     cur.execute('''INSERT INTO emi
-                    (sialink, link)
-                    VALUES(?, ?);''', data)
+                    (sialink, link, filesize, quality)
+                    VALUES(?, ?, ?);''', data)
 
     con.commit()
     con.close()
@@ -88,7 +88,7 @@ def DropTable():
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
 
-    cur.execute('DROP TABLE emi_movies')
+    cur.execute('DROP TABLE emi')
     con.commit()
     con.close()
 
@@ -141,7 +141,9 @@ def main():
                 (
                     id INTEGER PRIMARY KEY,
                     sialink VARCHAR(255),
-                    link VARCHAR(255))'''
+                    link VARCHAR(255),
+                    filesize REAL,
+                    quality varchar(32))'''
 
 
     cnama_movies_table_sql = '''CREATE TABLE IF NOT EXISTS cnama
@@ -186,6 +188,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # DropTable()
 
     # for i in range(122, 123):
     #     delete_task(i)
