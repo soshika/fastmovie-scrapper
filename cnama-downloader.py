@@ -28,7 +28,7 @@ def download_upload(link, file_name, size, quality):
     os.remove(file_path)
     print("File {0} deleted from server successfully".format(movie_name))
 
-    movieDB.InsertTableEmi(skylink, file_name, size)
+    movieDB.InsertTableEmi(skylink, file_name, size, quality)
     print("Inserted into DB Successfully")
     print('-'*50)
 
@@ -61,6 +61,8 @@ if __name__ == "__main__":
                         quality = quality + 'DVDRip-'
                     if 'BluRay' in row[2]:
                         quality = quality + 'BluRay-'
+                    
+                    print(link, row[2], size, quality)
                     download_upload(link, row[2], size, quality)
                     movieDB.delete_task(row[0])
                 
