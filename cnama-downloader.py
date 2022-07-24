@@ -62,6 +62,9 @@ if __name__ == "__main__":
                     if 'BluRay' in row[1]:
                         quality = quality + 'BluRay-'
                     
+                    if quality == '720p-':
+                        quality = '720p-webDL'
+                    
                     print(link, row[2], size, quality)
                     download_upload(link, row[2], size, quality)
                     movieDB.delete_task(row[0])
