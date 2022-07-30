@@ -51,7 +51,7 @@ if __name__ == "__main__":
     print('time to click on submit button')
     sleep(10)
 
-    for page in range(13, 2393):
+    for page in range(26, 2393):
         url = 'https://30nama.com/movie?sortBy=favorite'
         if page > 1:
             url = url + '&page={0}'.format(page)

@@ -79,20 +79,20 @@ if __name__ == "__main__":
                             for episode in range(1, 100):
                                 try:
                                     download_href = driver.find_element(By.XPATH, '//*[@id="main-container main-container-default"]/section/section[1]/section[2]/main/div/section[2]/section/section/section[{2}]/div/section[{0}]/section/section[2]/div/section/ul/li[{1}]/div/a'.format(link, episode, season)).get_attribute('href')
-                                    movieDB.InsertTableCnamaSeries(download_href, download_url_db)
-                                    print('insert into DB successfully ', download_href)
+                                    print(download_href)
+                                    if '720' in download_href and ('10bit' not in download_href  and '10bt' not in download_href):
+                                        print('hereeeeeeeeeeeeeeeeeeeeeeeee')
+                                        movieDB.InsertTableCnamaSeries(download_href, download_url_db)
+                                        print('insert into DB successfully ', download_href)
                                     sleep(1)
                                 except Exception as err:
-                                    print(err)
                                     break
                             
                             link_href.click()
                         except Exception as err:
-                            print(err)
                             break
 
                 except Exception as err:
-                    print(err)
                     break
 
             driver.get(url)
