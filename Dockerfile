@@ -23,11 +23,10 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/*
 RUN add-apt-repository universe
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get install -y ffmpeg
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
+RUN apt-get -y update
+RUN apt-get install -y ffmpeg
 # RUN pip3 install --upgrade pip
 # RUN pip3 install beautifulsoup4
 # RUN pip3 install wheel
