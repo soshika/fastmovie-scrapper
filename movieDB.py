@@ -50,13 +50,24 @@ def InsertTableCnama(download_link, link):
     con.commit()
     con.close()
 
-def InsertTableCnamaSeries(download_link, link):
+def InsertTableCnamaSeries(download_link, link, quality, subtitle, hash, size, season, episode):
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
-    data = [download_link, link]
+    data = [download_link, link, quality, subtitle, hash, size, season, episode]
     cur.execute('''INSERT INTO cnama_series
-                    (download_link, link)
-                    VALUES(?, ?);''', data)
+                    (download_link, link, quality, subtitle, hash, size, season, episode)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?);''', data)
+
+    con.commit()
+    con.close()
+
+def InsertTableCnamaSeriesSkylink(skylink, link, quality, subtitle, hash, size, season, episode):
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+    data = [skylink, link, quality, subtitle, hash, size, season, episode]
+    cur.execute('''INSERT INTO cnama_series_skylink
+                    (skylink, link, quality, subtitle, hash, size, season, episode)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?);''', data)
 
     con.commit()
     con.close()
@@ -88,7 +99,7 @@ def DropTable():
     con = sqlite3.connect('fastmovie-online.db')
     cur = con.cursor()
 
-    cur.execute('DROP TABLE emi')
+    cur.execute('DROP TABLE cnama_series')
     con.commit()
     con.close()
 
@@ -98,6 +109,16 @@ def selectTable():
     cur = con.cursor()
 
     cur.execute("SELECT * FROM cnama")
+
+    rows = cur.fetchall()
+
+    return rows
+
+def selectSeriesTable():
+    con = sqlite3.connect('fastmovie-online.db')
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM cnama_series")
 
     rows = cur.fetchall()
 
@@ -156,8 +177,27 @@ def main():
                 (
                     id INTEGER PRIMARY KEY,
                     download_link TEXT,
-                    link VARCHAR(255))'''
+                    link VARCHAR(255),
+                    quality VARCHAR(64),
+                    subtitle TEXT,
+                    hash VARCHAR(32),
+                    size REAL,
+                    episode INTEGER, 
+                    season INTEGER
+                )'''
 
+    cnama_series_skylink_table_sql = '''CREATE TABLE IF NOT EXISTS cnama_series_skylink
+                (
+                    id INTEGER PRIMARY KEY,
+                    skylink TEXT,
+                    link VARCHAR(255),
+                    quality VARCHAR(64),
+                    subtitle TEXT,
+                    hash VARCHAR(32),
+                    size REAL,
+                    episode VARCHAR(4), 
+                    season VARCHAR(4)
+                )'''
     telegram_table_sql = '''CREATE TABLE IF NOT EXISTS telegram
                 ( 
                     id INTEGER PRIMARY KEY,
@@ -181,6 +221,9 @@ def main():
 
         # create table telegram
         create_table(conn,telegram_table_sql)
+
+        # create cnama-skylink table
+        create_table(conn, cnama_series_skylink_table_sql)
 
     else:
         print("Error! cannot create the database connection.")
