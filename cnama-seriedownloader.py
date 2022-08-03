@@ -146,11 +146,11 @@ def download_upload(link, file_name, size, quality):
 
     # convert mkv to mp4
     mp4_file =convert_to_mp4(file_path)
-    mp4_file_path = directory + '/' + mp4_file
+    print('mp4 file is : ', mp4_file)
 
     # link to skynet
     client = skynet.SkynetClient() 
-    skylink = client.upload_file(mp4_file_path)
+    skylink = client.upload_file(mp4_file)
     print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
 
 
@@ -167,7 +167,7 @@ def download_upload(link, file_name, size, quality):
     print("File {0} deleted from server successfully".format(movie_name))
 
     # remove mp4 file
-    os.remove(mp4_file_path)
+    os.remove(mp4_file)
     print("File {0} deleted from server successfully".format(mp4_file))
 
     # insert to db
