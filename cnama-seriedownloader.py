@@ -11,7 +11,7 @@ import re
 
 
 def get_serie_data(data):
-    url = "https://fastmovie.online:9092/movies/data"
+    url = "http://fastmovie.online:9092/movies/data"
 
     payload = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
@@ -21,7 +21,7 @@ def get_serie_data(data):
     return response_dic['body']['imdbID']
 
 def subtitle_search(data):
-    url = "https://fastmovie.online:9092/subtitles/search"
+    url = "http://fastmovie.online:9092/subtitles/search"
 
     payload = json.dumps(data, indent = 4) 
     
@@ -49,7 +49,7 @@ def subtitle_search(data):
     return ret
 
 def subtitle_download(data):
-    url = "https://fastmovie.online:9092/subtitles/download"
+    url = "http://fastmovie.online:9092/subtitles/download"
     payload = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
 
