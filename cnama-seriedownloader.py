@@ -16,7 +16,7 @@ def get_serie_data(data):
     payload = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, verify=False)
     response_dic = response.json()
     return response_dic['body']['imdbID']
 
@@ -29,7 +29,7 @@ def subtitle_search(data):
     'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, verify=False)
     response_dic = response.json()
     subtitles = response_dic['body']['data']
 
@@ -53,7 +53,7 @@ def subtitle_download(data):
     payload = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, verify=False)
     response_dic = response.json()
 
     return response_dic['body']['link']
