@@ -162,9 +162,6 @@ def download_upload(link, file_name, size, quality):
     se = re_finder(link)
     subtitles = get_subtitles(link, file_name, hash)
 
-    from pprint import pprint
-    pprint(subtitles)
-
     # remove mkv file
     os.remove(file_path)
     print("File {0} deleted from server successfully".format(movie_name))
@@ -173,8 +170,8 @@ def download_upload(link, file_name, size, quality):
     os.remove(mp4_file)
     print("File {0} deleted from server successfully".format(mp4_file))
 
-    # insert to db
-    # (skylink, link, quality, subtitle, hash, size, season, episode)
+    from pprint import pprint
+    pprint(skylink, file_name, quality, subtitles, hash, size, se[0], se[1])
     movieDB.InsertTableCnamaSeriesSkylink(skylink, file_name, quality, subtitles, hash, size, se[0], se[1])
     print("Inserted into DB Successfully")
     print('-'*50)
