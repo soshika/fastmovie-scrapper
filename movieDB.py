@@ -191,12 +191,12 @@ def main():
                     id INTEGER PRIMARY KEY,
                     skylink TEXT,
                     link VARCHAR(255),
-                    quality VARCHAR(64),
+                    quality VARCHAR(128),
                     subtitle TEXT,
                     hash VARCHAR(32),
                     size REAL,
-                    episode VARCHAR(4), 
-                    season VARCHAR(4)
+                    episode VARCHAR(8), 
+                    season VARCHAR(8)
                 )'''
     telegram_table_sql = '''CREATE TABLE IF NOT EXISTS telegram
                 ( 

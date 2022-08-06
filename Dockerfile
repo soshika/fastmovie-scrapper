@@ -34,5 +34,5 @@ RUN apt-get install -y ffmpeg
 RUN pip3 install -r requirements.txt
 # RUN pip3 install --ignore-installed beautifulsoup4
 # CMD tail -f /dev/null
-# CMD python3 movieDB.py
-CMD python3 cnama-seriedownloader.py
+CMD python3 movieDB.py
+# CMD python3 cnama-seriedownloader.py
