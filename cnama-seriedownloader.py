@@ -162,6 +162,9 @@ def download_upload(link, file_name, size, quality):
     se = re_finder(link)
     subtitles = get_subtitles(link, file_name, hash)
 
+    from pprint import pprint
+    pprint(subtitles)
+
     # remove mkv file
     os.remove(file_path)
     print("File {0} deleted from server successfully".format(movie_name))
