@@ -93,7 +93,7 @@ def get_subtitles(download_link ,movie_link, hash):
 def convert_to_mp4(mkv_file):
     name, ext = os.path.splitext(mkv_file)
     out_name = name + ".mp4"
-    os.system('ffmpeg -i {0} -filter:v fps=fps=33 -vcodec libx264 -f mp4 {1}'.format(mkv_file, out_name))
+    os.system('ffmpeg -r 33 -i {0}  -vcodec libx264 -f mp4 {1}'.format(mkv_file, out_name))
     print("Finished converting {}".format(mkv_file))
     return out_name
 
