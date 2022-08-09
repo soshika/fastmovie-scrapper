@@ -192,8 +192,6 @@ if __name__ == "__main__":
                 print(err)
             
             if size <= 1.0:
-                if '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
-                    dp['{0}-720'.format(row[2])] = True
                     quality = '720p-'
                     if 'x265' in row[1]:
                         quality = quality + 'x265-'
@@ -211,4 +209,3 @@ if __name__ == "__main__":
                     
                     print(link, row[2], size, quality)
                     download_upload(link, row[2], size, quality)
-                    movieDB.delete_task(row[0])
