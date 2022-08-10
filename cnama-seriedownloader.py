@@ -6,8 +6,42 @@ import json
 import wget
 import siaskynet as skynet
 import urllib.request as ur
-import ffmpeg
 import re
+
+
+def download_link(link):
+    try:
+        movie_name = wget.download(link)
+    except Exception as err :
+        print(err)
+        return None
+    
+    return movie_name
+
+def upload_to_siasky(file):
+    base = os.getcwd() + '/'
+    # base = '/code'
+    full_path = base + file
+    upload_path = base + '/subtitle.vtt'
+
+    lines = open(full_path, "r")
+
+    with open(upload_path, 'a') as f:
+        f.write("WEBVTT\n")
+    
+    for line in lines:
+        tmp = line.replace(',', '.')
+        with open(upload_path, 'a') as f:
+            f.write(tmp)
+
+    client = skynet.SkynetClient() 
+    skylink = client.upload_file(upload_path)
+
+    # remove file
+    os.remove(full_path)
+    os.remove(upload_path)
+
+    return skylink
 
 
 def get_serie_data(data):
@@ -85,7 +119,10 @@ def get_subtitles(download_link ,movie_link, hash):
     for file in files:
         data = {'file_id': file['file']}
         subtitle_link = subtitle_download(data)
-        subtitles.append({'link': subtitle_link, 'language': file['language']})
+        subtitle_file = download_link(subtitle_link)
+        subtitle_skylink = upload_to_siasky(subtitle_file)
+        print('subtitle is now vtt : ' ,subtitle_skylink)
+        subtitles.append({'link': subtitle_skylink, 'language': file['language']})
 
     ret = ' '.join([str(elem) for elem in subtitles])
     return ret
