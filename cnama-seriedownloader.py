@@ -119,7 +119,9 @@ def get_subtitles(download_link ,movie_link, hash):
     for file in files:
         data = {'file_id': file['file']}
         subtitle_link = subtitle_download(data)
+        print(subtitle_link)
         subtitle_file = download_link(subtitle_link)
+        print(subtitle_file)
         subtitle_skylink = upload_to_siasky(subtitle_file)
         print('subtitle is now vtt : ' ,subtitle_skylink)
         subtitles.append({'link': subtitle_skylink, 'language': file['language']})
@@ -219,30 +221,30 @@ if __name__ == "__main__":
     rows = movieDB.selectSeriesTable()
 
     for row in rows:
-        if '720' in row[1]:
-            link = row[1]
-            info = ur.urlopen(link)
-            try:
-                size = int(info.headers['Content-Length'])/ 1000000000
-                print('size of file is : ', size)
-            except Exception as err:
-                print(err)
-            
-            if size <= 1.0:
-                    quality = '720p-'
-                    if 'x265' in row[1]:
-                        quality = quality + 'x265-'
-                    if '10bit' in row[1]:
-                        quality = quality + '10bkt-'
-                    if 'BrRip' in row[1]:
-                        quality = quality + 'BrRip-'
-                    if 'DVDRip' in row[1]:
-                        quality = quality + 'DVDRip-'
-                    if 'BluRay' in row[1]:
-                        quality = quality + 'BluRay-'
-                    
-                    if quality == '720p-':
-                        quality = '720p-webDL'
-                    
-                    print(link, row[2], size, quality)
-                    download_upload(link, row[2], size, quality)
+        # if '720' in row[1]:
+        link = row[1]
+        info = ur.urlopen(link)
+        try:
+            size = int(info.headers['Content-Length'])/ 1000000000
+            print('size of file is : ', size)
+        except Exception as err:
+            print(err)
+        
+        if size <= 1.0:
+                quality = '720p-'
+                if 'x265' in row[1]:
+                    quality = quality + 'x265-'
+                if '10bit' in row[1]:
+                    quality = quality + '10bkt-'
+                if 'BrRip' in row[1]:
+                    quality = quality + 'BrRip-'
+                if 'DVDRip' in row[1]:
+                    quality = quality + 'DVDRip-'
+                if 'BluRay' in row[1]:
+                    quality = quality + 'BluRay-'
+                
+                if quality == '720p-':
+                    quality = '720p-webDL'
+                
+                print(link, row[2], size, quality)
+                download_upload(link, row[2], size, quality)
