@@ -10,13 +10,9 @@ import re
 
 
 def download_link(link):
-    try:
-        movie_name = wget.download(link)
-    except Exception as err :
-        print(err)
-        return None
-    
-    return movie_name
+    sub_name = 'test.srt'
+    os.system('wget -O {0} {1}'.format(sub_name, link))
+    return sub_name
 
 def upload_to_siasky(file):
     base = os.getcwd() + '/'
