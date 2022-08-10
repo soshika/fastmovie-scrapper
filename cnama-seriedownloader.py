@@ -9,7 +9,7 @@ import urllib.request as ur
 import re
 
 
-def download_link(link):
+def download_linkII(link):
     file_name = 'subtitle.srt'
     response = requests.get(link)
     open("./subtitle.srt", "wb").write(response.content)
@@ -17,9 +17,11 @@ def download_link(link):
 
 def upload_to_siasky(file):
     base = os.getcwd() + '/'
-    # base = '/code'
+    # base = '/usr/src/app'
     full_path = base + file
+    print('full_path of srt subtitle is : ', full_path)
     upload_path = base + '/subtitle.vtt'
+    print('upload_path is : ', upload_path)
 
     lines = open(full_path, "r")
 
@@ -39,7 +41,6 @@ def upload_to_siasky(file):
     os.remove(upload_path)
 
     return skylink
-
 
 def get_serie_data(data):
     url = "http://fastmovie.online:9092/movies/data"
@@ -116,9 +117,7 @@ def get_subtitles(download_link ,movie_link, hash):
     for file in files:
         data = {'file_id': file['file']}
         subtitle_link = subtitle_download(data)
-        print(subtitle_link)
-        subtitle_file = download_link(subtitle_link)
-        print(subtitle_file)
+        subtitle_file = download_linkII(subtitle_link)
         subtitle_skylink = upload_to_siasky(subtitle_file)
         print('subtitle is now vtt : ' ,subtitle_skylink)
         subtitles.append({'link': subtitle_skylink, 'language': file['language']})
