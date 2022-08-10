@@ -117,6 +117,7 @@ def get_subtitles(download_link ,movie_link, hash):
     for file in files:
         data = {'file_id': file['file']}
         subtitle_link = subtitle_download(data)
+        print(subtitle_link)
         subtitle_file = download_linkII(subtitle_link)
         subtitle_skylink = upload_to_siasky(subtitle_file)
         print('subtitle is now vtt : ' ,subtitle_skylink)
