@@ -10,9 +10,10 @@ import re
 
 
 def download_link(link):
-    sub_name = 'test.srt'
-    os.system('wget -O {0} {1}'.format(sub_name, link))
-    return sub_name
+    file_name = 'subtitle.srt'
+    response = requests.get(link)
+    open("./subtitle.srt", "wb").write(response.content)
+    return file_name
 
 def upload_to_siasky(file):
     base = os.getcwd() + '/'
