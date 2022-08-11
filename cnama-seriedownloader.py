@@ -122,6 +122,7 @@ def get_subtitles(download_link ,movie_link, hash):
             return None
         print(subtitle_link)
         subtitle_file = download_linkII(subtitle_link)
+        print(subtitle_file)
         subtitle_skylink = upload_to_siasky(subtitle_file)
         print('subtitle is now vtt : ' ,subtitle_skylink)
         subtitles.append({'link': subtitle_skylink, 'language': file['language']})
@@ -180,6 +181,12 @@ def download_upload(link, file_name, size, quality):
 
     print('\nFile {0} Downloaded Successfully'.format(movie_name))
 
+    se = re_finder(link)
+    subtitles = get_subtitles(link, file_name, hash)
+
+    if subtitles == None:
+        return
+
     # get current directory
     directory = os.getcwd()
     file_path = directory + '/' + movie_name
@@ -198,9 +205,6 @@ def download_upload(link, file_name, size, quality):
     hash = hashFile(file_path)
     if hash == 'IOError' or hash == 'SizeError':
         hash = ''
-
-    se = re_finder(link)
-    subtitles = get_subtitles(link, file_name, hash)
 
     # remove mkv file
     os.remove(file_path)
