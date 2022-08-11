@@ -119,7 +119,6 @@ def get_subtitles(download_link ,movie_link, hash):
         subtitle_link = subtitle_download(data)
         if subtitle_link == "" or 'https' not in subtitle_link:
             print("Subtitle API is Limited ... ")
-            return None
         print(subtitle_link)
         subtitle_file = download_linkII(subtitle_link)
         print(subtitle_file)
@@ -181,12 +180,6 @@ def download_upload(link, file_name, size, quality):
 
     print('\nFile {0} Downloaded Successfully'.format(movie_name))
 
-    se = re_finder(link)
-    subtitles = get_subtitles(link, file_name, hash)
-
-    if subtitles == None:
-        return
-
     # get current directory
     directory = os.getcwd()
     file_path = directory + '/' + movie_name
@@ -200,11 +193,13 @@ def download_upload(link, file_name, size, quality):
     skylink = client.upload_file(mp4_file)
     print("File {0} Uploaded successfully: link is {1} ".format(movie_name, skylink))
 
-
     # get hash of file
     hash = hashFile(file_path)
     if hash == 'IOError' or hash == 'SizeError':
         hash = ''
+
+    se = re_finder(link)
+    subtitles = get_subtitles(link, file_name, hash)
 
     # remove mkv file
     os.remove(file_path)
