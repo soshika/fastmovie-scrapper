@@ -117,6 +117,9 @@ def get_subtitles(download_link ,movie_link, hash):
     for file in files:
         data = {'file_id': file['file']}
         subtitle_link = subtitle_download(data)
+        if subtitle_link == "" or 'https' not in subtitle_link:
+            print("Subtitle API is Limited ... ")
+            return None
         print(subtitle_link)
         subtitle_file = download_linkII(subtitle_link)
         subtitle_skylink = upload_to_siasky(subtitle_file)
