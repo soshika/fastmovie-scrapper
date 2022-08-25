@@ -117,6 +117,7 @@ def get_subtitles(download_link ,movie_link, hash):
     for file in files:
         data = {'file_id': file['file']}
         subtitle_link = subtitle_download(data)
+        
         if subtitle_link == "" or 'https' not in subtitle_link:
             print("Subtitle API is Limited ... ")
         print(subtitle_link)
@@ -127,6 +128,7 @@ def get_subtitles(download_link ,movie_link, hash):
         subtitles.append({'link': subtitle_skylink, 'language': file['language']})
 
     ret = ' '.join([str(elem) for elem in subtitles])
+    print(ret)
     return ret
 
 def convert_to_mp4(mkv_file):
