@@ -12,7 +12,7 @@ def convert_to_mp4(mkv_file):
 
 if __name__ == "__main__":
 
-    url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/5986/12157/46.105.134.229/1661592553/307c8b2e76af92b10cc4b18756ffec0ea4f317c128/series/friends/Friends_S01E01_720p_BluRa>
+    url = 'https://eu.cdn.cloudam.cc/download/2/4/825041/5986/12157/212.103.48.92/1664025491/30d1648027a3160e2411cdf04d7749f450fd666f0c/series/friends/Friends_S01E01_720p_BluRay_PaHe_30NAMA.mkv'
     name = wget.download(url)
 
     mp4_file_name = convert_to_mp4(name)
