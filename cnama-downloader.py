@@ -47,7 +47,7 @@ if __name__ == "__main__":
             except Exception as err:
                 print(err)
             
-            if size <= 1.2:
+            if size <= 0.99:
                 if '720' in info.headers['Content-Disposition'] and '{0}-720'.format(row[2]) not in dp:
                     dp['{0}-720'.format(row[2])] = True
                     quality = '720p-'
