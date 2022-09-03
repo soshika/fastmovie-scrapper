@@ -4,7 +4,7 @@ services:
       build: .
       restart: always
       privileged: true
-      container_name: fastmovie-scrapper
+      container_name: fastmovie-scrapper2
       logging:
         driver: "json-file"
         options:
