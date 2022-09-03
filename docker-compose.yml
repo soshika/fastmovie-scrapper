@@ -17,4 +17,4 @@ services:
       environment:
         - os=ubuntu
       volumes:
-        - /root/projects/fastmovie-scrapper:/usr/src/app
+        - /root/projects/scrapper/fastmovie-scrapper:/usr/src/app/scrapper
