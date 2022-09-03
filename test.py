@@ -1,25 +1,20 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-from moviepy.editor import *
-import wget
-import siaskynet as skynet
+from moviepy.editor import VideoFileClip
+from time import sleep
 
 if __name__ == "__main__":
+    full_video = "./itest.mp4"
+    current_duration = VideoFileClip(full_video).duration
+    divide_into_count = 5
+    single_duration = current_duration/divide_into_count
+    current_video = f"{current_duration}.mp4"
 
-    output = 'otest.mp4'
-    file_name = wget.download("https://siasky.net/GADohxbY-BLhLJ0CIb3jo7yW3CynCtGfKfkQJnPSw9NuYA")
-    
-    
-    clip = VideoFileClip(file_name)
-    clip.write_videofile(output, fps=30)
+    while current_duration > single_duration:
+        clip = VideoFileClip(full_video).subclip(current_duration-single_duration, current_duration)
+        current_duration -= single_duration
+        current_video = f"{current_duration}.mp4"
+        clip.to_videofile(current_video, codec="libx264", temp_audiofile='temp-audio.m4a', remove_temp=True, audio_codec='aac')
 
-     # get current directory
-    directory = os.getcwd()
-    file_path = directory + '/' + output
-
-    # link to skynet
-    client = skynet.SkynetClient() 
-    skylink = client.upload_file(file_path)
-    print("File {0} Uploaded successfully: link is {1} ".format(file_name, skylink))
-
+        print("-----------------###-----------------")
