@@ -3,6 +3,7 @@
 
 from moviepy.editor import VideoFileClip
 from time import sleep
+from apify_client import ApifyClient
 
 import os, ffmpeg
 
@@ -39,7 +40,22 @@ def compress_video(video_full_path, output_file_name, target_size):
 
 if __name__ == "__main__":
 
-    compress_video('4176.312.mp4', 'output.mp4', 50 * 1000)
+    # compress_video('4176.312.mp4', 'output.mp4', 50 * 1000)
+
+    # Initialize the ApifyClient with your API token
+    client = ApifyClient("apify_api_5GYrjsJrvSEpSZxmaQx2bqoSMRRyg74sHobe")
+
+    # Prepare the actor input
+    run_input = { "outputFormat": "mp4" }
+
+    # Run the actor and wait for it to finish
+    run = client.actor("lukaskrivka/audio-video-converter").call(run_input=run_input)
+
+    # Fetch and print actor results from the run's dataset (if there are any)
+    for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+        print(item)
+
+    
 
     # full_video = "./itest.mp4"
     # current_duration = VideoFileClip(full_video).duration
